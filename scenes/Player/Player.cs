@@ -39,6 +39,7 @@ public partial class Player : CharacterBody3D
         {
             case STATE.MOVING:
                 exitInput();
+                scaleInput();
                 attackInput();
                 move(delta);
                 break;
@@ -49,6 +50,13 @@ public partial class Player : CharacterBody3D
     {
         if(Input.IsActionPressed("quit"))
             GetTree().Quit();
+    }
+    private void scaleInput()
+    {
+        if(Input.IsActionJustPressed("q"))
+            scale(0.5f);
+        else if(Input.IsActionJustPressed("e"))
+            scale(-0.5f);
     }
     private void attackInput()
     {
@@ -77,5 +85,13 @@ public partial class Player : CharacterBody3D
 
         Velocity = moveVector*speed;
         MoveAndSlide();
+    }
+    private void scale(float amount)
+    {
+        if((Scale.Y+amount) <= 0.0f || (Scale.Y+amount) >= 2.0f)
+            return;
+        speed -= amount;
+        Scale += new Vector3(amount, amount, amount);
+        GlobalPosition += new Vector3(0.0f, amount/2.0f, 0.0f);
     }
 }

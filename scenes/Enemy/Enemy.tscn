@@ -1,11 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://eu438nat5igx"]
+[gd_scene load_steps=10 format=3 uid="uid://eu438nat5igx"]
 
 [ext_resource type="Script" path="res://scenes/Enemy/Enemy.cs" id="1_sbrpi"]
 [ext_resource type="PackedScene" uid="uid://b41fbt3yk70fg" path="res://scenes/Enemy/EnemyDead/EnemyDead.tscn" id="2_riy7f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c1kip"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw35c"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jkv3s"]
+material = SubResource("StandardMaterial3D_pw35c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qovv6"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pk727"]
+material = SubResource("StandardMaterial3D_qovv6")
+
+[sub_resource type="Animation" id="Animation_rw0gy"]
+resource_name = "damage"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yay32"]
+_data = {
+"damage": SubResource("Animation_rw0gy")
+}
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_sbrpi")
@@ -15,4 +57,13 @@ enemyDeadScene = ExtResource("2_riy7f")
 shape = SubResource("CapsuleShape3D_c1kip")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_jkv3s")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_pk727")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yay32")
+}

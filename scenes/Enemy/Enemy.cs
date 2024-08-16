@@ -7,18 +7,41 @@ public partial class Enemy : CharacterBody3D
     public int health;
     [Export]
     public PackedScene enemyDeadScene;
+    AnimationPlayer animPlayer;
+    public override void _Ready()
+    {
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+    }
     public void damage(Player player, int amount)
     {
+        if(player.Scale.Y < Scale.Y)
+            return;
         if(health <= 0)
             spawnRagdoll(player);
+        else
+        {
+            health -= 10;
+            scale(-0.2f);
+            animPlayer.Play("damage");
+        }
+    }
+
+    private void scale(float amount)
+    {
+        if((Scale.Y+amount) <= 0.8f || (Scale.Y+amount) >= 2.0f)
+            return;
+        Scale += new Vector3(amount, amount, amount);
+        GlobalPosition += new Vector3(0.0f, amount/2.0f, 0.0f);
     }
 
     private void spawnRagdoll(Player player)
     {
-        RigidBody3D enemyDead = enemyDeadScene.Instantiate<RigidBody3D>();
+        EnemyDead enemyDead = (EnemyDead)enemyDeadScene.Instantiate<RigidBody3D>();
         GetParent().AddChild(enemyDead);
         enemyDead.GlobalTransform = GlobalTransform;
-        enemyDead.LinearVelocity = (GlobalPosition - player.GlobalPosition).Normalized() * 8.0f;
+        enemyDead.scale(Scale);
+        GD.Print(enemyDead.Scale);
+        enemyDead.LinearVelocity = ((GlobalPosition - player.GlobalPosition).Normalized() + new Vector3(0.0f, 0.4f, 0.0f)) * 15.0f;
         QueueFree();
     }
 }
