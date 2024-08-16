@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbsucqyll2fn5"]
+
+[ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_g25c0"]
+[ext_resource type="PackedScene" uid="uid://bv8ue81ttw63g" path="res://scenes/Fists/Fists.tscn" id="2_wj8fp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_06pf0"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_g25c0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_06pf0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.351498)
+target_position = Vector3(0, 0, -2)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="Fists" parent="Camera3D" instance=ExtResource("2_wj8fp")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.715, -1)

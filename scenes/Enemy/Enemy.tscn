@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://eu438nat5igx"]
+
+[ext_resource type="Script" path="res://scenes/Enemy/Enemy.cs" id="1_sbrpi"]
+[ext_resource type="PackedScene" uid="uid://b41fbt3yk70fg" path="res://scenes/Enemy/EnemyDead/EnemyDead.tscn" id="2_riy7f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c1kip"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pk727"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_sbrpi")
+enemyDeadScene = ExtResource("2_riy7f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_c1kip")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_pk727")
