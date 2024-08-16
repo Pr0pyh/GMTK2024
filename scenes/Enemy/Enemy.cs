@@ -7,6 +7,7 @@ public partial class Enemy : CharacterBody3D
     public int health;
     [Export]
     public PackedScene enemyDeadScene;
+    float speed;
     AnimationPlayer animPlayer;
     public override void _Ready()
     {

@@ -14,12 +14,15 @@ public partial class Player : CharacterBody3D
     public float mouseSens;
     STATE state;
     Camera3D camera;
+    Camera3D viewportCamera;
     Fists fists;
     RayCast3D ray;
+    float trauma;
 
     public override void _Ready()
     {
         camera = GetNode<Camera3D>("Camera3D");
+        viewportCamera = camera.GetNode<SubViewportContainer>("SubViewportContainer").GetNode<SubViewport>("SubViewport").GetNode<Camera3D>("ViewportCamera");
         ray = camera.GetNode<RayCast3D>("RayCast3D");
         fists = camera.GetNode<Fists>("Fists");
         Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -40,10 +43,16 @@ public partial class Player : CharacterBody3D
             case STATE.MOVING:
                 exitInput();
                 scaleInput();
+                viewportUpdate();
+                shakeState(delta);
                 attackInput();
                 move(delta);
                 break;
         }
+    }
+    public void addTrauma(float value)
+    {
+        trauma += value;
     }
     //input
     private void exitInput()
@@ -61,7 +70,10 @@ public partial class Player : CharacterBody3D
     private void attackInput()
     {
         if(Input.IsActionJustPressed("attack"))
-            fists.attack(ray);
+            fists.attack(ref ray);
+
+        if(Input.IsActionJustPressed("attack2"))
+            fists.attack2(ref ray);
     }
     private Vector3 moveInput()
     {
@@ -79,6 +91,10 @@ public partial class Player : CharacterBody3D
 
         return moveVector;
     }
+    private void viewportUpdate()
+    {
+        viewportCamera.GlobalTransform = camera.GlobalTransform;
+    }
     private void move(double delta)
     {
         Vector3 moveVector = moveInput();
@@ -90,8 +106,25 @@ public partial class Player : CharacterBody3D
     {
         if((Scale.Y+amount) <= 0.0f || (Scale.Y+amount) >= 2.0f)
             return;
-        speed -= amount;
+        speed -= amount*5.0f;
+        fists.animPlayer.SpeedScale -= amount;
         Scale += new Vector3(amount, amount, amount);
-        GlobalPosition += new Vector3(0.0f, amount/2.0f, 0.0f);
+        GlobalPosition += new Vector3(0.0f, amount, 0.0f);
+    }
+    private void shake()
+    {
+        float amount = trauma;
+        // camera.HOffset = (float)(amount*GD.RandRange(-1, 1));
+        // camera.VOffset = (float)(amount*GD.RandRange(-1, 1));
+        camera.HOffset = (float)(amount);
+        camera.VOffset = (float)(amount);
+    }
+    private void shakeState(double delta)
+    {
+        if(!(trauma < 0.0f))
+        {
+            shake();
+            trauma = Mathf.Max((float)(trauma - 0.8*delta), 0.0f);
+        }
     }
 }

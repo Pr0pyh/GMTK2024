@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv8ue81ttw63g"]
+[gd_scene load_steps=8 format=3 uid="uid://bv8ue81ttw63g"]
 
 [ext_resource type="Script" path="res://scenes/Fists/Fists.cs" id="1_aggd1"]
+[ext_resource type="PackedScene" uid="uid://hpdvds2xm58a" path="res://scenes/Fists/Impact/Impact.tscn" id="2_e7rc1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pnj4o"]
 
 [sub_resource type="Animation" id="Animation_q0lrh"]
 resource_name = "attack"
-length = 0.15
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -15,10 +16,24 @@ tracks/0/path = NodePath("MeshInstance3D2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(2.5, 0, -1), Vector3(1.5, 0, -3), Vector3(1, 0, -3.5), Vector3(2.5, 0, -1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attackRay"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_e5vr4"]
@@ -36,21 +51,56 @@ tracks/0/keys = {
 "values": [Vector3(2.5, 0, -1)]
 }
 
+[sub_resource type="Animation" id="Animation_y64jj"]
+resource_name = "attack_2"
+length = 0.3
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attackRay"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-2.5, 0, -1), Vector3(-1.5, 0, -3), Vector3(-1, 0, -3.5), Vector3(-2.5, 0, -1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7y2se"]
 _data = {
 "RESET": SubResource("Animation_e5vr4"),
-"attack": SubResource("Animation_q0lrh")
+"attack": SubResource("Animation_q0lrh"),
+"attack_2": SubResource("Animation_y64jj")
 }
 
 [node name="Fists" type="Node3D"]
 script = ExtResource("1_aggd1")
+impactScene = ExtResource("2_e7rc1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -1)
+layers = 2
 mesh = SubResource("BoxMesh_pnj4o")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -1)
+layers = 2
 mesh = SubResource("BoxMesh_pnj4o")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
