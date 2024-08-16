@@ -4,14 +4,19 @@ using System;
 public partial class Fists : Node3D
 {
     public AnimationPlayer animPlayer;
+    public AnimationPlayer animPlayer2;
     RayCast3D raycast;
+    TextureRect textureRect;
     Player player;
     [Export]
     PackedScene impactScene;
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
+        textureRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureRect>("TextureRect");
         player = (Player)GetParent().GetParent();
+        textureRect.Visible = false;
     }
     public void attack(ref RayCast3D raycast)
     {
@@ -38,7 +43,8 @@ public partial class Fists : Node3D
                 enemy.damage(player, 10);
             }
             addImpact(raycast.GetCollisionPoint());
-            player.addTrauma(0.1f);
+            player.addTrauma(0.2f);
+            animPlayer2.Play("screen");
             GD.Print("colliding");
         }
     }

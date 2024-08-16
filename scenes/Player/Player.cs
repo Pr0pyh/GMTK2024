@@ -116,8 +116,8 @@ public partial class Player : CharacterBody3D
         float amount = trauma;
         // camera.HOffset = (float)(amount*GD.RandRange(-1, 1));
         // camera.VOffset = (float)(amount*GD.RandRange(-1, 1));
-        camera.HOffset = (float)(amount);
-        camera.VOffset = (float)(amount);
+        camera.HOffset = (float)(-1*-amount);
+        camera.VOffset = (float)(-1*amount);
     }
     private void shakeState(double delta)
     {

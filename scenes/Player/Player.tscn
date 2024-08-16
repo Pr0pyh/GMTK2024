@@ -33,7 +33,9 @@ size_flags_horizontal = 4
 
 [node name="SubViewport" type="SubViewport" parent="Camera3D/SubViewportContainer"]
 transparent_bg = true
+handle_input_locally = false
 size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
 [node name="ViewportCamera" type="Camera3D" parent="Camera3D/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
