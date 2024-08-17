@@ -105,7 +105,10 @@ public partial class Player : CharacterBody3D
         animPlayer.Play("screen");
         addTrauma(0.3f);
         if(health <= 0)
-            GetTree().ReloadCurrentScene();
+        {
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+            GetTree().ChangeSceneToFile("res://scenes/EndScreen/EndScene.tscn");
+        }
         else
             health -= value;
     }
