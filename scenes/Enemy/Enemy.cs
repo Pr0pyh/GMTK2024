@@ -9,18 +9,24 @@ public partial class Enemy : CharacterBody3D
     public PackedScene enemyDeadScene;
     float speed;
     AnimationPlayer animPlayer;
+    GpuParticles3D particles;
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        particles = GetNode<GpuParticles3D>("GPUParticles3D");
+        particles.Emitting = false;
     }
     public void damage(Player player, int amount)
     {
         if(player.Scale.Y < Scale.Y)
             return;
         if(health <= 0)
+        {
             spawnRagdoll(player);
+        }
         else
         {
+            particles.Emitting = true;
             health -= 10;
             scale(-0.2f);
             animPlayer.Play("damage");

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://eu438nat5igx"]
+[gd_scene load_steps=13 format=3 uid="uid://eu438nat5igx"]
 
 [ext_resource type="Script" path="res://scenes/Enemy/Enemy.cs" id="1_sbrpi"]
 [ext_resource type="PackedScene" uid="uid://b41fbt3yk70fg" path="res://scenes/Enemy/EnemyDead/EnemyDead.tscn" id="2_riy7f"]
@@ -49,6 +49,21 @@ _data = {
 "damage": SubResource("Animation_rw0gy")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i2t65"]
+direction = Vector3(0, 0, 0)
+radial_velocity_min = 10.0
+radial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 5.0
+radial_accel_max = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7w5qc"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fn81n"]
+material = SubResource("StandardMaterial3D_7w5qc")
+size = Vector3(0.3, 0.3, 0.3)
+
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_sbrpi")
 enemyDeadScene = ExtResource("2_riy7f")
@@ -67,3 +82,16 @@ mesh = SubResource("CapsuleMesh_pk727")
 libraries = {
 "": SubResource("AnimationLibrary_yay32")
 }
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0755513, 0, 0)
+emitting = false
+amount = 6
+sub_emitter = NodePath(".")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+visibility_aabb = AABB(-4, -3.22229, -4, 8, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_i2t65")
+draw_pass_1 = SubResource("BoxMesh_fn81n")
