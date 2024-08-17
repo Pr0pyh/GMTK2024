@@ -23,6 +23,7 @@ public partial class Enemy : CharacterBody3D
     RayCast3D raycast;
     Player player;
     Enemy flankEnemy;
+    bool canAttack = true;
     public override void _Ready()
     {
         player = GetParent().GetNode<Player>("Player");
@@ -47,13 +48,19 @@ public partial class Enemy : CharacterBody3D
             case STATE.ATTACKING:
                 break;
             case STATE.HURT:
+                canAttack = false;
                 break;
         }
     }
     public void damage(Player player, int amount)
     {
+        state = STATE.HURT;
+        GD.Print(state);
         if(player.Scale.Y < Scale.Y)
+        {
+            animPlayer.Play("hurt");
             return;
+        }
         if(health <= 0)
         {
             spawnRagdoll(player);
@@ -117,16 +124,22 @@ public partial class Enemy : CharacterBody3D
         }
         if(body is Player player)
         {
+            GD.Print(canAttack);
+            if(!canAttack) return;
             state = STATE.ATTACKING;
             animPlayer2.Play("attack");
         }
-        GD.Print(state);
     }
 
     public void _on_enemy_detect_body_exited(Node3D body)
     {
         if(body is Enemy enemy) state = STATE.MOVING;
-    } 
+    }
+    public void _on_animation_player_animation_finished(String animName)
+    {
+        canAttack = true;
+        // if(animName == "damage") state = STATE.MOVING;
+    }
     public void _on_animation_player_2_animation_finished(String animName)
     {
         if(animName == "attack") state = STATE.MOVING;
