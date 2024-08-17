@@ -273,7 +273,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 cull_mask = 1047554
 
 [node name="Fists" parent="Camera3D/SubViewportContainer/SubViewport/ViewportCamera" instance=ExtResource("2_wj8fp")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.715, -1)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.785, -0.925)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

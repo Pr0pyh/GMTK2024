@@ -29,6 +29,8 @@ public partial class Player : CharacterBody3D
     int cig = 0;
     int maxBeer = 6;
     int maxCig = 6;
+    //sway mouse
+    float mouseMove;
     public override void _Ready()
     {
         camera = GetNode<Camera3D>("Camera3D");
@@ -48,6 +50,7 @@ public partial class Player : CharacterBody3D
     {
         if(@event is InputEventMouseMotion mouseMotion)
         {
+            mouseMove = -mouseMotion.Relative.X;
             camera.RotateX(Mathf.DegToRad(mouseMotion.Relative.Y * mouseSens * -1));
             camera.RotationDegrees = new Vector3(Mathf.Clamp(camera.RotationDegrees.X, -75.0f, 75.0f), 0.0f, 0.0f);
             this.RotateY(Mathf.DegToRad(mouseMotion.Relative.X * mouseSens * -1));
@@ -58,6 +61,7 @@ public partial class Player : CharacterBody3D
         switch(state)
         {
             case STATE.MOVING:
+                sway(delta);
                 exitInput();
                 scaleInput();
                 updateBar();
@@ -105,6 +109,18 @@ public partial class Player : CharacterBody3D
             health -= value;
     }
     //input
+    private void sway(double delta)
+    {
+        if(mouseMove != null)
+        {
+            if(mouseMove > 16)
+                fists.Position = fists.Position.Lerp(new Vector3(-0.24f, -0.784f, -0.925f), (float)(delta*5)); 
+            else if(mouseMove < -16)
+                fists.Position = fists.Position.Lerp(new Vector3(0.24f, -0.784f, -0.925f), (float)(delta*5));
+            else
+                fists.Position = fists.Position.Lerp(new Vector3(0.0f, -0.784f, -0.925f), (float)(delta*5));
+        }
+    }
     private void updateBar()
     {
         textureProgressBar.Value = health;
