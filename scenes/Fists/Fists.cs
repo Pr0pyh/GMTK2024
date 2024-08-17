@@ -11,6 +11,7 @@ public partial class Fists : Node3D
     AudioStreamPlayer audioPlayer;
     [Export]
     PackedScene impactScene;
+    bool canAttack = true;
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -22,20 +23,25 @@ public partial class Fists : Node3D
     }
     public void attack(ref RayCast3D raycast)
     {
+        if(!canAttack) return;
         this.raycast = raycast;
+        canAttack = false;
         animPlayer.Stop();
         animPlayer.Play("attack");
     }
 
     public void attack2(ref RayCast3D raycast)
     {
+        if(!canAttack) return;
         this.raycast = raycast;
+        canAttack = false;
         animPlayer.Stop();
         animPlayer.Play("attack_2");
     }
 
     public void attackRay()
     {
+        canAttack = true;
         raycast.ForceRaycastUpdate();
         if(raycast.IsColliding())
         {

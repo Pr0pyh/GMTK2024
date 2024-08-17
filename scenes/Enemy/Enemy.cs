@@ -16,7 +16,7 @@ public partial class Enemy : CharacterBody3D
     [Export]
     public PackedScene enemyDeadScene;
     [Export]
-    float speed;
+    public float speed;
     AnimationPlayer animPlayer;
     AnimationPlayer animPlayer2;
     GpuParticles3D particles;
@@ -34,7 +34,7 @@ public partial class Enemy : CharacterBody3D
         raycast = GetNode<RayCast3D>("RayCast3D");
         spawner = GetParent<EnemySpawner>();
         particles.Emitting = false;
-        speed = 2.0f-Scale.Y;
+        speed += 2.0f-Scale.Y;
         state = STATE.MOVING;
     }
     public override void _PhysicsProcess(double delta)

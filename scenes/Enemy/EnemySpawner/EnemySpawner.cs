@@ -19,6 +19,7 @@ public partial class EnemySpawner : Node3D
     int maxNumber;
     int number = 0;
     int score = 0;
+    float speed = 0.0f;
     Timer timer;
     World world;
     public override void _Ready()
@@ -31,6 +32,9 @@ public partial class EnemySpawner : Node3D
     {
         Enemy enemy = (Enemy)enemyScene.Instantiate();
         AddChild(enemy);
+        if(speed < 15.0f) speed += 0.5f;
+        enemy.speed += speed;
+        GD.Print(enemy.speed);
         enemy.Scale = new Vector3(enemyScale, enemyScale, enemyScale);
         enemy.GlobalPosition = new Vector3(position.X, enemyScale, position.Z);
         number++;
