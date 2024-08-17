@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dbsucqyll2fn5"]
+[gd_scene load_steps=33 format=3 uid="uid://dbsucqyll2fn5"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_g25c0"]
 [ext_resource type="PackedScene" uid="uid://bv8ue81ttw63g" path="res://scenes/Fists/Fists.tscn" id="2_wj8fp"]
@@ -20,22 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://djji24vhvkgot" path="res://assets/Sprite/cigarica/image/sprite_3.png" id="17_xqce4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_06pf0"]
-
-[sub_resource type="Animation" id="Animation_a4c2g"]
-resource_name = "screen"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/TextureRect:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_e0ci0"]
 length = 0.001
@@ -86,6 +70,54 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer/StartLabel:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/StartLabel:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_r0iro"]
@@ -146,12 +178,80 @@ tracks/1/keys = {
 "values": [false, true, false, true]
 }
 
+[sub_resource type="Animation" id="Animation_a4c2g"]
+resource_name = "screen"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/TextureRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_on5gr"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/StartLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": ["", "FIGHT!!!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/StartLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t3al7"]
 _data = {
 "RESET": SubResource("Animation_e0ci0"),
 "beer": SubResource("Animation_r0iro"),
 "cig": SubResource("Animation_2s06i"),
-"screen": SubResource("Animation_a4c2g")
+"screen": SubResource("Animation_a4c2g"),
+"start": SubResource("Animation_on5gr")
 }
 
 [sub_resource type="Gradient" id="Gradient_8t6xh"]
@@ -276,6 +376,31 @@ cull_mask = 1047554
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.785, -0.925)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.231373, 0.188235, 0.0862745, 1)
+
+[node name="StartLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = -20.0
+offset_right = -167.0
+offset_bottom = -3.99997
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8.77216, 4.75202)
+theme = ExtResource("14_f6iiq")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 visible = false

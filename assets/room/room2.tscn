@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://bms5ilyi3c6wk"]
+
+[ext_resource type="PackedScene" uid="uid://dh8thentgqefc" path="res://assets/room/room.glb" id="1_8ag0l"]
+
+[node name="room2" instance=ExtResource("1_8ag0l")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9.25122, 7.84025, -6.54392)
+light_color = Color(1, 0.647059, 0, 1)
+light_energy = 14.899
+spot_range = 11.5332
+spot_attenuation = 0.406126
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -32.3447, 7.84025, -6.54392)
+light_color = Color(1, 0.647059, 0, 1)
+light_energy = 14.899
+spot_range = 11.5332
+spot_attenuation = 0.406126
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -32.3447, 7.84025, -38.4399)
+light_color = Color(1, 0.647059, 0, 1)
+light_energy = 14.899
+spot_range = 11.5332
+spot_attenuation = 0.406126
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10.3904, 7.84025, -38.4399)
+light_color = Color(1, 0.647059, 0, 1)
+light_energy = 14.899
+spot_range = 11.5332
+spot_attenuation = 0.406126
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -21.0569, 7.84025, -24.4595)
+light_color = Color(1, 0.647059, 0, 1)
+light_energy = 14.899
+spot_range = 11.5332
+spot_attenuation = 0.406126

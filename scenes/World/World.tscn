@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq0m4nthlox7s"]
+[gd_scene load_steps=9 format=3 uid="uid://cq0m4nthlox7s"]
 
 [ext_resource type="PackedScene" uid="uid://dbsucqyll2fn5" path="res://scenes/Player/Player.tscn" id="1_yna32"]
 [ext_resource type="PackedScene" uid="uid://eu438nat5igx" path="res://scenes/Enemy/Enemy.tscn" id="2_w61br"]
@@ -6,24 +6,28 @@
 [ext_resource type="PackedScene" uid="uid://ddey0dlhjalxf" path="res://scenes/PickUps/PickUpSpawner/PickUpSpawner.tscn" id="3_so41x"]
 [ext_resource type="PackedScene" uid="uid://dtthi26k6yalq" path="res://scenes/PickUps/Cigar/Cigar.tscn" id="4_es1ni"]
 [ext_resource type="PackedScene" uid="uid://cj74qqdvb2cpf" path="res://scenes/Enemy/EnemySpawner/EnemySpawner.tscn" id="4_j1qu6"]
+[ext_resource type="PackedScene" uid="uid://bms5ilyi3c6wk" path="res://assets/room/room2.tscn" id="7_48cqi"]
 
 [sub_resource type="Environment" id="Environment_qtwle"]
-background_color = Color(0.470588, 0, 0, 1)
-ambient_light_color = Color(0.176471, 0, 0, 1)
+background_mode = 1
+background_color = Color(0.301961, 0.227451, 0.054902, 1)
+background_energy_multiplier = 6.86
+ambient_light_color = Color(0.321569, 0.305882, 0.176471, 1)
 
 [node name="World" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 83, 3, 0)
+visible = false
 use_collision = true
 flip_faces = true
-size = Vector3(36, 5, 31)
+size = Vector3(36, 6, 31)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qtwle")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.677077, 0.12941, 0.724444, -0.433013, 0.866025, 0.25, -0.595035, -0.482963, 0.642402, 10, 10, 8)
+transform = Transform3D(0.677077, 0.12941, 0.724445, -0.433013, 0.866025, 0.25, -0.595035, -0.482963, 0.642402, 26, 10, 8)
 
 [node name="Player" parent="." instance=ExtResource("1_yna32")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -33,36 +37,40 @@ health = 100
 
 [node name="PickUpSpawner" parent="." instance=ExtResource("3_so41x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.381318, 1.29514, 5.68479)
-minX = -15.0
-maxX = 15.0
-minZ = -12.0
-maxZ = 12.0
+minX = -21.0
+maxX = 2.0
+minZ = -13.0
+maxZ = 6.0
 pickupScene = ExtResource("3_lybvo")
 pickupScene2 = ExtResource("4_es1ni")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_j1qu6")]
-minX = -15.0
-maxX = 15.0
-minZ = -12.0
-maxZ = 12.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3133, 0, 6.31787)
+minX = -21.0
+maxX = 2.0
+minZ = -13.0
+maxZ = 6.0
 enemyScene = ExtResource("2_w61br")
 enemyScale = 0.5
 maxNumber = 2
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("4_j1qu6")]
-minX = -15.0
-maxX = 15.0
-minZ = -12.0
-maxZ = 12.0
+minX = -21.0
+maxX = 2.0
+minZ = -13.0
+maxZ = 4.0
 enemyScene = ExtResource("2_w61br")
 enemyScale = 1.0
 maxNumber = 2
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("4_j1qu6")]
-minX = -15.0
-maxX = 15.0
-minZ = -12.0
-maxZ = 12.0
+minX = -21.0
+maxX = 2.0
+minZ = -13.0
+maxZ = 6.0
 enemyScene = ExtResource("2_w61br")
 enemyScale = 1.5
 maxNumber = 2
+
+[node name="room2" parent="." instance=ExtResource("7_48cqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.177919, 0)

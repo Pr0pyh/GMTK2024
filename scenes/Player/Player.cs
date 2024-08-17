@@ -41,6 +41,7 @@ public partial class Player : CharacterBody3D
         textureProgressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureProgressBar>("TextureProgressBar");
         beerCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D").GetNode<Label>("Label");
         cigCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D3").GetNode<Label>("Label");
+        animPlayer.Play("start");
         beerCountLabel.Text = beer.ToString();
         cigCountLabel.Text = cig.ToString();
         fists.player = this;
