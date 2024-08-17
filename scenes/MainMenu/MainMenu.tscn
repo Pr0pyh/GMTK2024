@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://kgw2m7k36xc1"]
+
+[ext_resource type="Texture2D" uid="uid://2w02t0ae7ihs" path="res://assets/Sprite/background/explosion-th/sprite_0.png" id="1_433sl"]
+[ext_resource type="Script" path="res://scenes/MainMenu/MainMenu.cs" id="1_vdltp"]
+[ext_resource type="Texture2D" uid="uid://bsvdq3ckxq201" path="res://assets/Sprite/background/explosion-th/sprite_1.png" id="2_7mp56"]
+[ext_resource type="Texture2D" uid="uid://4tcfggcgkkqb" path="res://assets/Sprite/background/explosion-th/sprite_2.png" id="3_ahe67"]
+[ext_resource type="Texture2D" uid="uid://c5jxdv4t00rw5" path="res://assets/Sprite/background/explosion-th/sprite_3.png" id="4_he8ta"]
+[ext_resource type="Texture2D" uid="uid://dibeh82cudaht" path="res://assets/Sprite/background/explosion-th/sprite_4.png" id="5_wpuec"]
+[ext_resource type="Theme" uid="uid://cp1kq7i07405s" path="res://assets/Font/MinimalUI(1).tres" id="6_623gv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akq8s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_433sl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7mp56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ahe67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_he8ta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wpuec")
+}],
+"loop": true,
+"name": &"bob",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vdltp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.333333, 0.0862745, 1, 1)
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(565, 192)
+rotation = -0.0626882
+scale = Vector2(11.1133, -8.59745)
+sprite_frames = SubResource("SpriteFrames_akq8s")
+animation = &"bob"
+autoplay = "bob"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 98.0
+offset_right = 466.0
+offset_bottom = 121.0
+rotation = -0.132412
+scale = Vector2(5.75057, 8.52625)
+theme = ExtResource("6_623gv")
+text = "Bar code"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 410.0
+offset_right = 667.0
+offset_bottom = 467.0
+theme = ExtResource("6_623gv")
+text = "START"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 501.0
+offset_right = 668.0
+offset_bottom = 558.0
+theme = ExtResource("6_623gv")
+text = "EXIT"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
