@@ -8,12 +8,14 @@ public partial class Fists : Node3D
     RayCast3D raycast;
     TextureRect textureRect;
     Player player;
+    AudioStreamPlayer audioPlayer;
     [Export]
     PackedScene impactScene;
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         textureRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureRect>("TextureRect");
         player = (Player)GetParent().GetParent();
         textureRect.Visible = false;
@@ -46,6 +48,7 @@ public partial class Fists : Node3D
             player.addTrauma(0.2f);
             animPlayer2.Play("screen");
             GD.Print("colliding");
+            audioPlayer.Play();
         }
     }
 

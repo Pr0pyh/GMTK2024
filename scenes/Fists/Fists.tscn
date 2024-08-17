@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv8ue81ttw63g"]
+[gd_scene load_steps=12 format=3 uid="uid://bv8ue81ttw63g"]
 
 [ext_resource type="Script" path="res://scenes/Fists/Fists.cs" id="1_aggd1"]
 [ext_resource type="PackedScene" uid="uid://hpdvds2xm58a" path="res://scenes/Fists/Impact/Impact.tscn" id="2_e7rc1"]
+[ext_resource type="AudioStream" uid="uid://bw8ucaj8l3h8g" path="res://assets/Sounds/vine-boom.mp3" id="3_sptqs"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pnj4o"]
 
@@ -163,3 +164,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_bwf80")
 metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sptqs")
