@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dbsucqyll2fn5"]
+[gd_scene load_steps=32 format=3 uid="uid://dbsucqyll2fn5"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_g25c0"]
 [ext_resource type="PackedScene" uid="uid://bv8ue81ttw63g" path="res://scenes/Fists/Fists.tscn" id="2_wj8fp"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c5jxdv4t00rw5" path="res://assets/Sprite/background/explosion-th/sprite_3.png" id="9_ggk0p"]
 [ext_resource type="Texture2D" uid="uid://dibeh82cudaht" path="res://assets/Sprite/background/explosion-th/sprite_4.png" id="10_bad3l"]
 [ext_resource type="Texture2D" uid="uid://lbu6l1b2tjwe" path="res://assets/Sprite/cigarica/image/sprite_0.png" id="14_6m0vt"]
+[ext_resource type="Theme" uid="uid://cp1kq7i07405s" path="res://assets/Font/MinimalUI(1).tres" id="14_f6iiq"]
 [ext_resource type="Texture2D" uid="uid://b3d0krxid21p2" path="res://assets/Sprite/cigarica/image/sprite_1.png" id="15_wwwip"]
 [ext_resource type="Texture2D" uid="uid://bv7ledfhfrp38" path="res://assets/Sprite/cigarica/image/sprite_2.png" id="16_4nvjw"]
 [ext_resource type="Texture2D" uid="uid://djji24vhvkgot" path="res://assets/Sprite/cigarica/image/sprite_3.png" id="17_xqce4"]
@@ -50,10 +51,106 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/TextureRect2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/AnimatedSprite2D3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r0iro"]
+resource_name = "beer"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/TextureRect2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2s06i"]
+resource_name = "cig"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/TextureRect2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/AnimatedSprite2D3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t3al7"]
 _data = {
 "RESET": SubResource("Animation_e0ci0"),
+"beer": SubResource("Animation_r0iro"),
+"cig": SubResource("Animation_2s06i"),
 "screen": SubResource("Animation_a4c2g")
 }
 
@@ -63,6 +160,16 @@ colors = PackedColorArray(0, 0, 0, 0, 0.0454545, 0.0272727, 0.00374332, 0.045454
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_d2kvb"]
 gradient = SubResource("Gradient_8t6xh")
+fill = 1
+fill_from = Vector2(0.51, 0.46)
+fill_to = Vector2(-0.625, 0.991)
+
+[sub_resource type="Gradient" id="Gradient_nwe2f"]
+offsets = PackedFloat32Array(0, 0.0714286, 0.714286, 0.87013)
+colors = PackedColorArray(0, 0, 0, 0, 0.0454545, 0.0272727, 0.00374332, 0.0454545, 0.207843, 0.501961, 0.0823529, 1, 0.470588, 0.635294, 0.0823529, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6t5qi"]
+gradient = SubResource("Gradient_nwe2f")
 fill = 1
 fill_from = Vector2(0.51, 0.46)
 fill_to = Vector2(-0.625, 0.991)
@@ -180,6 +287,16 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_d2kvb")
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6t5qi")
+metadata/_edit_use_anchors_ = true
+
 [node name="Crosshair" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -232,6 +349,22 @@ autoplay = "bob1"
 frame = 2
 frame_progress = 0.251535
 
+[node name="Label" type="Label" parent="CanvasLayer/AnimatedSprite2D"]
+offset_left = -6.09571
+offset_top = 19.0106
+offset_right = 33.9043
+offset_bottom = 42.0106
+theme = ExtResource("14_f6iiq")
+
+[node name="Label2" type="Label" parent="CanvasLayer/AnimatedSprite2D"]
+offset_left = 6.13826
+offset_top = -40.1518
+offset_right = 46.1383
+offset_bottom = -17.1518
+scale = Vector2(1.24448, 1.25678)
+theme = ExtResource("14_f6iiq")
+text = "	Q"
+
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="CanvasLayer"]
 position = Vector2(223, 106)
 scale = Vector2(2.31442, 2.45034)
@@ -240,3 +373,24 @@ animation = &"bob2"
 autoplay = "bob2"
 frame = 1
 frame_progress = 0.931065
+
+[node name="Label" type="Label" parent="CanvasLayer/AnimatedSprite2D3"]
+offset_left = -12.9622
+offset_top = 14.6919
+offset_right = 27.0378
+offset_bottom = 37.6919
+theme = ExtResource("14_f6iiq")
+text = "
+
+
+"
+
+[node name="Label2" type="Label" parent="CanvasLayer/AnimatedSprite2D3"]
+offset_left = 7.34527
+offset_top = -25.7108
+offset_right = 47.3453
+offset_bottom = -2.71075
+rotation = -0.0381047
+scale = Vector2(1.13826, 1.14692)
+theme = ExtResource("14_f6iiq")
+text = "E"

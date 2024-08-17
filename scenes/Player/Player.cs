@@ -21,6 +21,8 @@ public partial class Player : CharacterBody3D
     RayCast3D ray;
     AnimationPlayer animPlayer;
     TextureProgressBar textureProgressBar;
+    Label beerCountLabel;
+    Label cigCountLabel;
     float trauma;
     //beer and cigarrete count
     int beer = 0;
@@ -35,6 +37,10 @@ public partial class Player : CharacterBody3D
         fists = viewportCamera.GetNode<Fists>("Fists");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         textureProgressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureProgressBar>("TextureProgressBar");
+        beerCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D").GetNode<Label>("Label");
+        cigCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D3").GetNode<Label>("Label");
+        beerCountLabel.Text = beer.ToString();
+        cigCountLabel.Text = cig.ToString();
         fists.player = this;
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
@@ -67,8 +73,9 @@ public partial class Player : CharacterBody3D
     {
         if(cig < maxCig)
         {
+            animPlayer.Play("cig");
             cig++;
-            GD.Print(cig);
+            cigCountLabel.Text = cig.ToString();
             return true;
         }
         return false;
@@ -77,8 +84,9 @@ public partial class Player : CharacterBody3D
     {
         if(beer < maxBeer)
         {
+            animPlayer.Play("beer");
             beer++;
-            GD.Print(beer);
+            beerCountLabel.Text = beer.ToString();
             return true;
         }
         return false;
@@ -110,12 +118,16 @@ public partial class Player : CharacterBody3D
     {
         if(Input.IsActionJustPressed("q") && beer>0)
         {
+            animPlayer.Play("beer");
             beer--;
+            beerCountLabel.Text = beer.ToString();
             scale(0.5f);
         }
         else if(Input.IsActionJustPressed("e") && cig>0)
         {
+            animPlayer.Play("cig");
             cig--;
+            cigCountLabel.Text = cig.ToString();
             scale(-0.5f);
         }
     }
