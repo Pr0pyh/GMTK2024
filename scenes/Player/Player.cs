@@ -31,8 +31,9 @@ public partial class Player : CharacterBody3D
         camera = GetNode<Camera3D>("Camera3D");
         viewportCamera = camera.GetNode<SubViewportContainer>("SubViewportContainer").GetNode<SubViewport>("SubViewport").GetNode<Camera3D>("ViewportCamera");
         ray = camera.GetNode<RayCast3D>("RayCast3D");
-        fists = camera.GetNode<Fists>("Fists");
+        fists = viewportCamera.GetNode<Fists>("Fists");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        fists.player = this;
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
     public override void _Input(InputEvent @event)

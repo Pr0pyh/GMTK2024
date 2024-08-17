@@ -7,7 +7,7 @@ public partial class Fists : Node3D
     public AnimationPlayer animPlayer2;
     RayCast3D raycast;
     TextureRect textureRect;
-    Player player;
+    public Player player;
     AudioStreamPlayer audioPlayer;
     [Export]
     PackedScene impactScene;
@@ -17,7 +17,7 @@ public partial class Fists : Node3D
         animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         textureRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureRect>("TextureRect");
-        player = (Player)GetParent().GetParent();
+        // player = (Player)GetParent().GetParent();
         textureRect.Visible = false;
     }
     public void attack(ref RayCast3D raycast)

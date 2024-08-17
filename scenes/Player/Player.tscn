@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbsucqyll2fn5"]
+[gd_scene load_steps=10 format=3 uid="uid://dbsucqyll2fn5"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_g25c0"]
 [ext_resource type="PackedScene" uid="uid://bv8ue81ttw63g" path="res://scenes/Fists/Fists.tscn" id="2_wj8fp"]
+[ext_resource type="Texture2D" uid="uid://hh2w5hagk05c" path="res://assets/Sprite/crosshair.png" id="3_sdp60"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_06pf0"]
 
@@ -43,7 +44,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_8t6xh"]
-offsets = PackedFloat32Array(0, 0.324675, 0.545455, 0.948052)
+offsets = PackedFloat32Array(0, 0.0714286, 0.435065, 0.948052)
 colors = PackedColorArray(0, 0, 0, 0, 0.0454545, 0.0272727, 0.00374332, 0.0454545, 1, 0, 0.0823529, 1, 0.470588, 0, 0.0823529, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_d2kvb"]
@@ -69,11 +70,8 @@ cull_mask = 1048573
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.591)
-target_position = Vector3(0, 0, -2)
+target_position = Vector3(0, 0, -3)
 debug_shape_custom_color = Color(1, 0, 0, 1)
-
-[node name="Fists" parent="Camera3D" instance=ExtResource("2_wj8fp")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.715, -1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Camera3D"]
 anchors_preset = 15
@@ -93,6 +91,9 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 cull_mask = 1047554
 
+[node name="Fists" parent="Camera3D/SubViewportContainer/SubViewport/ViewportCamera" instance=ExtResource("2_wj8fp")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.715, -1)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
@@ -104,3 +105,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_d2kvb")
 metadata/_edit_use_anchors_ = true
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.5
+offset_right = 18.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_sdp60")
+expand_mode = 1

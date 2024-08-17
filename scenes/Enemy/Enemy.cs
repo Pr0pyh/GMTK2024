@@ -23,14 +23,16 @@ public partial class Enemy : CharacterBody3D
     RayCast3D raycast;
     Player player;
     Enemy flankEnemy;
+    EnemySpawner spawner;
     bool canAttack = true;
     public override void _Ready()
     {
-        player = GetParent().GetNode<Player>("Player");
+        player = GetParent().GetParent().GetNode<Player>("Player");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
         raycast = GetNode<RayCast3D>("RayCast3D");
+        spawner = GetParent<EnemySpawner>();
         particles.Emitting = false;
         speed = 2.0f-Scale.Y;
         state = STATE.MOVING;
@@ -55,9 +57,10 @@ public partial class Enemy : CharacterBody3D
     public void damage(Player player, int amount)
     {
         state = STATE.HURT;
-        GD.Print(state);
+        GD.Print(Scale);
         if(player.Scale.Y < Scale.Y)
         {
+            animPlayer.Stop();
             animPlayer.Play("hurt");
             return;
         }
@@ -70,6 +73,7 @@ public partial class Enemy : CharacterBody3D
             particles.Emitting = true;
             health -= 10;
             scale(-0.2f);
+            animPlayer.Stop();
             animPlayer.Play("damage");
         }
     }
@@ -107,6 +111,7 @@ public partial class Enemy : CharacterBody3D
 
     private void spawnRagdoll(Player player)
     {
+        spawner.decrease();
         EnemyDead enemyDead = (EnemyDead)enemyDeadScene.Instantiate<RigidBody3D>();
         GetParent().AddChild(enemyDead);
         enemyDead.GlobalTransform = GlobalTransform;
@@ -124,7 +129,7 @@ public partial class Enemy : CharacterBody3D
         }
         if(body is Player player)
         {
-            GD.Print(canAttack);
+            GD.Print(state);
             if(!canAttack) return;
             state = STATE.ATTACKING;
             animPlayer2.Play("attack");
