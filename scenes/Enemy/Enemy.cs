@@ -120,12 +120,13 @@ public partial class Enemy : CharacterBody3D
             state = STATE.ATTACKING;
             animPlayer2.Play("attack");
         }
+        GD.Print(state);
     }
 
     public void _on_enemy_detect_body_exited(Node3D body)
     {
         if(body is Enemy enemy) state = STATE.MOVING;
-    }
+    } 
     public void _on_animation_player_2_animation_finished(String animName)
     {
         if(animName == "attack") state = STATE.MOVING;
