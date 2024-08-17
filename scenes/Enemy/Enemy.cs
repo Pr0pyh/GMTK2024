@@ -10,11 +10,15 @@ public partial class Enemy : CharacterBody3D
     [Export]
     float speed;
     AnimationPlayer animPlayer;
+    AnimationPlayer animPlayer2;
     GpuParticles3D particles;
+    RayCast3D raycast;
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
+        raycast = GetNode<RayCast3D>("RayCast3D");
         particles.Emitting = false;
         speed = 5.0f;
     }
@@ -34,7 +38,15 @@ public partial class Enemy : CharacterBody3D
             animPlayer.Play("damage");
         }
     }
-
+    public void attackPlayer()
+    {
+        raycast.ForceRaycastUpdate();
+        if(raycast.IsColliding())
+        {
+            if(raycast.GetCollider() is Player player)
+                player.damage(5);
+        }
+    }
     private void scale(float amount)
     {
         if((Scale.Y+amount) <= 0.8f || (Scale.Y+amount) >= 2.0f)
@@ -52,5 +64,13 @@ public partial class Enemy : CharacterBody3D
         GD.Print(enemyDead.Scale);
         enemyDead.LinearVelocity = ((GlobalPosition - player.GlobalPosition).Normalized() + new Vector3(0.0f, 0.4f, 0.0f)) * 15.0f;
         QueueFree();
+    }
+    public void _on_enemy_detect_body_entered(Node3D body)
+    {
+        if(body is Player player)
+        {
+            animPlayer2.Stop();
+            animPlayer2.Play("attack");
+        }
     }
 }

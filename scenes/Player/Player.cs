@@ -12,11 +12,14 @@ public partial class Player : CharacterBody3D
     public float speed;
     [Export]
     public float mouseSens;
+    [Export]
+    public int health;
     STATE state;
     Camera3D camera;
     Camera3D viewportCamera;
     Fists fists;
     RayCast3D ray;
+    AnimationPlayer animPlayer;
     float trauma;
 
     public override void _Ready()
@@ -25,6 +28,7 @@ public partial class Player : CharacterBody3D
         viewportCamera = camera.GetNode<SubViewportContainer>("SubViewportContainer").GetNode<SubViewport>("SubViewport").GetNode<Camera3D>("ViewportCamera");
         ray = camera.GetNode<RayCast3D>("RayCast3D");
         fists = camera.GetNode<Fists>("Fists");
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
     public override void _Input(InputEvent @event)
@@ -53,6 +57,15 @@ public partial class Player : CharacterBody3D
     public void addTrauma(float value)
     {
         trauma += value;
+    }
+    public void damage(int value)
+    {
+        animPlayer.Play("screen");
+        addTrauma(0.3f);
+        if(health <= 0)
+            GetTree().ReloadCurrentScene();
+        else
+            health -= value;
     }
     //input
     private void exitInput()

@@ -35,3 +35,4 @@ health = 20
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 speed = 5.0
 mouseSens = 0.1
+health = 20

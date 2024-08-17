@@ -119,12 +119,12 @@ _data = {
 "screen": SubResource("Animation_2ejqc")
 }
 
-[sub_resource type="Gradient" id="Gradient_87j04"]
+[sub_resource type="Gradient" id="Gradient_ba7ph"]
 offsets = PackedFloat32Array(0, 0.357143, 0.772727)
 colors = PackedColorArray(0, 0, 0, 0, 0.0454545, 0.0272727, 0.00374332, 0.0454545, 1, 0.6, 0.0823529, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bwf80"]
-gradient = SubResource("Gradient_87j04")
+gradient = SubResource("Gradient_ba7ph")
 fill = 1
 fill_from = Vector2(0.51, 0.46)
 fill_to = Vector2(-0.625, 0.991)
