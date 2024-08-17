@@ -29,7 +29,7 @@ transform = Transform3D(0.677077, 0.12941, 0.724444, -0.433013, 0.866025, 0.25, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 speed = 5.0
 mouseSens = 0.1
-health = 20
+health = 100
 
 [node name="PickUpSpawner" parent="." instance=ExtResource("3_so41x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.381318, 1.29514, 5.68479)

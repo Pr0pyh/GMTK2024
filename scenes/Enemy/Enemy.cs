@@ -72,7 +72,7 @@ public partial class Enemy : CharacterBody3D
         {
             particles.Emitting = true;
             health -= 10;
-            scale(-0.2f);
+            // scale(-0.2f);
             animPlayer.Stop();
             animPlayer.Play("damage");
         }
@@ -83,7 +83,7 @@ public partial class Enemy : CharacterBody3D
         if(raycast.IsColliding())
         {
             if(raycast.GetCollider() is Player player)
-                player.damage(5);
+                player.damage(10);
         }
     }
     private void move()

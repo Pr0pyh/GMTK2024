@@ -20,6 +20,7 @@ public partial class Player : CharacterBody3D
     Fists fists;
     RayCast3D ray;
     AnimationPlayer animPlayer;
+    TextureProgressBar textureProgressBar;
     float trauma;
     //beer and cigarrete count
     int beer = 0;
@@ -33,6 +34,7 @@ public partial class Player : CharacterBody3D
         ray = camera.GetNode<RayCast3D>("RayCast3D");
         fists = viewportCamera.GetNode<Fists>("Fists");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        textureProgressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureProgressBar>("TextureProgressBar");
         fists.player = this;
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
@@ -52,6 +54,7 @@ public partial class Player : CharacterBody3D
             case STATE.MOVING:
                 exitInput();
                 scaleInput();
+                updateBar();
                 viewportUpdate();
                 shakeState(delta);
                 attackInput();
@@ -94,6 +97,10 @@ public partial class Player : CharacterBody3D
             health -= value;
     }
     //input
+    private void updateBar()
+    {
+        textureProgressBar.Value = health;
+    }
     private void exitInput()
     {
         if(Input.IsActionPressed("quit"))
