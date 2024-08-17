@@ -3,6 +3,14 @@ using System;
 
 public partial class Enemy : CharacterBody3D
 {
+    enum STATE
+    {
+        MOVING,
+        FLANK,
+        ATTACKING,
+        HURT
+    };
+    STATE state;
     [Export]
     public int health;
     [Export]
@@ -13,14 +21,34 @@ public partial class Enemy : CharacterBody3D
     AnimationPlayer animPlayer2;
     GpuParticles3D particles;
     RayCast3D raycast;
+    Player player;
+    Enemy flankEnemy;
     public override void _Ready()
     {
+        player = GetParent().GetNode<Player>("Player");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
         raycast = GetNode<RayCast3D>("RayCast3D");
         particles.Emitting = false;
-        speed = 5.0f;
+        speed = 0.5f;
+        state = STATE.MOVING;
+    }
+    public override void _PhysicsProcess(double delta)
+    {
+        switch(state)
+        {
+            case STATE.MOVING:
+                move();
+                break;
+            case STATE.FLANK:
+                moveFlank();
+                break;
+            case STATE.ATTACKING:
+                break;
+            case STATE.HURT:
+                break;
+        }
     }
     public void damage(Player player, int amount)
     {
@@ -47,6 +75,21 @@ public partial class Enemy : CharacterBody3D
                 player.damage(5);
         }
     }
+    private void move()
+    {
+        LookAt(player.GlobalPosition, Vector3.Up, true);
+        Rotation = new Vector3(0.0f, Rotation.Y, Rotation.Z);
+        Vector3 moveVector = (player.GlobalPosition - GlobalPosition).Normalized();
+        Velocity = moveVector*speed;
+        MoveAndSlide();
+    }
+    private void moveFlank()
+    {
+        Vector3 moveVector = (GlobalPosition - flankEnemy.GlobalPosition).Normalized();
+        moveVector.Y = 0.0f;
+        Velocity = moveVector*speed;
+        MoveAndSlide();
+    }
     private void scale(float amount)
     {
         if((Scale.Y+amount) <= 0.8f || (Scale.Y+amount) >= 2.0f)
@@ -67,10 +110,24 @@ public partial class Enemy : CharacterBody3D
     }
     public void _on_enemy_detect_body_entered(Node3D body)
     {
+        if(body is Enemy enemy)
+        {
+            flankEnemy = enemy;
+            state = STATE.FLANK;
+        }
         if(body is Player player)
         {
-            animPlayer2.Stop();
+            state = STATE.ATTACKING;
             animPlayer2.Play("attack");
         }
+    }
+
+    public void _on_enemy_detect_body_exited(Node3D body)
+    {
+        if(body is Enemy enemy) state = STATE.MOVING;
+    }
+    public void _on_animation_player_2_animation_finished(String animName)
+    {
+        if(animName == "attack") state = STATE.MOVING;
     }
 }

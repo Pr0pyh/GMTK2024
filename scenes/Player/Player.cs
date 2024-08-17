@@ -135,8 +135,8 @@ public partial class Player : CharacterBody3D
         // viewportCamera.VOffset = (float)(amount*GD.RandRange(-1, 1));
         camera.HOffset = (float)(-1*-amount);
         camera.VOffset = (float)(-1*amount);
-        viewportCamera.HOffset = (float)(-1*amount);
-        viewportCamera.VOffset = (float)(-1*-amount);
+        viewportCamera.HOffset = (float)(-1*-amount);
+        viewportCamera.VOffset = (float)(-1*amount);
     }
     private void shakeState(double delta)
     {

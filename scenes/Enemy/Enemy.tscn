@@ -70,7 +70,6 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_jfmbk"]
 resource_name = "attack"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -78,10 +77,10 @@ tracks/0/path = NodePath("MeshInstance3D2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.416785, 0.284219, 0.699891), Vector3(-0.416785, 0.284219, 1.40538), Vector3(-0.416785, 0.284219, 0.699891)]
+"values": [Vector3(-0.416785, 0.284219, 0.699891), Vector3(-0.416785, 0.598407, 0.699891), Vector3(-0.416785, 0.22339, 0.86924), Vector3(-0.416785, 0.284219, 0.699891)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -90,12 +89,24 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
+"times": PackedFloat32Array(0.7),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"attackPlayer"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyDetect:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_fet4t"]
@@ -111,6 +122,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-0.29, 0.284, 0.7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyDetect:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_haypy"]
@@ -135,7 +158,7 @@ material = SubResource("StandardMaterial3D_7w5qc")
 size = Vector3(0.3, 0.3, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mleg6"]
-size = Vector3(1.09402, 1, 2.31815)
+size = Vector3(3, 1.44385, 2.31815)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b40hd"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -179,12 +202,12 @@ visible = false
 [node name="EnemyDetect" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyDetect"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0639191, 0, 0.659073)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0494843, 0.221924, 0.659073)
 shape = SubResource("BoxShape3D_mleg6")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393642, 0.510071)
-target_position = Vector3(0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.591112, 0.510071)
+target_position = Vector3(0, 0, 1.5)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -195,4 +218,6 @@ mesh = SubResource("BoxMesh_b40hd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0.284, 0.7)
 mesh = SubResource("BoxMesh_b40hd")
 
+[connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_animation_player_2_animation_finished"]
 [connection signal="body_entered" from="EnemyDetect" to="." method="_on_enemy_detect_body_entered"]
+[connection signal="body_exited" from="EnemyDetect" to="." method="_on_enemy_detect_body_exited"]
