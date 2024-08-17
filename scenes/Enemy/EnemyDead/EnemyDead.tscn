@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b41fbt3yk70fg"]
+[gd_scene load_steps=7 format=3 uid="uid://b41fbt3yk70fg"]
 
 [ext_resource type="Script" path="res://scenes/Enemy/EnemyDead/EnemyDead.cs" id="1_syiwi"]
+[ext_resource type="PackedScene" uid="uid://i4l8p1ekos75" path="res://assets/Man/manDamaged.glb" id="2_cgjmc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b5qc3"]
 friction = 0.5
@@ -23,10 +24,13 @@ script = ExtResource("1_syiwi")
 shape = SubResource("CapsuleShape3D_kxxls")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_dklh3")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="manDamaged" parent="." instance=ExtResource("2_cgjmc")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

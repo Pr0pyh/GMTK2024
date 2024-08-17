@@ -1,21 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://eu438nat5igx"]
+[gd_scene load_steps=12 format=3 uid="uid://eu438nat5igx"]
 
 [ext_resource type="Script" path="res://scenes/Enemy/Enemy.cs" id="1_sbrpi"]
 [ext_resource type="PackedScene" uid="uid://b41fbt3yk70fg" path="res://scenes/Enemy/EnemyDead/EnemyDead.tscn" id="2_riy7f"]
 [ext_resource type="PackedScene" uid="uid://7b8lchr3mmah" path="res://assets/Man/man.glb" id="3_1ec48"]
+[ext_resource type="PackedScene" uid="uid://i4l8p1ekos75" path="res://assets/Man/manDamaged.glb" id="4_vdqth"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c1kip"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw35c"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jkv3s"]
-material = SubResource("StandardMaterial3D_pw35c")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qovv6"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pk727"]
-material = SubResource("StandardMaterial3D_qovv6")
 
 [sub_resource type="Animation" id="Animation_rw0gy"]
 resource_name = "damage"
@@ -23,7 +13,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:visible")
+tracks/0/path = NodePath("man:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D2:visible")
+tracks/1/path = NodePath("manDamaged:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -45,8 +35,36 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_nqj4v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("manDamaged:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("man:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yay32"]
 _data = {
+"RESET": SubResource("Animation_nqj4v"),
 "damage": SubResource("Animation_rw0gy")
 }
 
@@ -72,14 +90,6 @@ enemyDeadScene = ExtResource("2_riy7f")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_c1kip")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_jkv3s")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_pk727")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yay32")
@@ -100,3 +110,6 @@ draw_pass_1 = SubResource("BoxMesh_fn81n")
 
 [node name="man" parent="." instance=ExtResource("3_1ec48")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="manDamaged" parent="." instance=ExtResource("4_vdqth")]
+visible = false

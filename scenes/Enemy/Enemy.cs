@@ -7,6 +7,7 @@ public partial class Enemy : CharacterBody3D
     public int health;
     [Export]
     public PackedScene enemyDeadScene;
+    [Export]
     float speed;
     AnimationPlayer animPlayer;
     GpuParticles3D particles;
@@ -15,6 +16,7 @@ public partial class Enemy : CharacterBody3D
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
         particles.Emitting = false;
+        speed = 5.0f;
     }
     public void damage(Player player, int amount)
     {
