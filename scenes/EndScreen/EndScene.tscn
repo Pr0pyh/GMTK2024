@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjdlt5j0s8l3u"]
+[gd_scene load_steps=10 format=3 uid="uid://cjdlt5j0s8l3u"]
 
 [ext_resource type="Texture2D" uid="uid://2w02t0ae7ihs" path="res://assets/Sprite/background/explosion-th/sprite_0.png" id="1_02uc1"]
 [ext_resource type="Script" path="res://scenes/EndScreen/EndScene.cs" id="1_a83cw"]
 [ext_resource type="Texture2D" uid="uid://bsvdq3ckxq201" path="res://assets/Sprite/background/explosion-th/sprite_1.png" id="2_dyvg8"]
+[ext_resource type="Resource" uid="uid://t6qxyhgho885" path="res://resources/Score.tres" id="2_jg06o"]
 [ext_resource type="Texture2D" uid="uid://4tcfggcgkkqb" path="res://assets/Sprite/background/explosion-th/sprite_2.png" id="3_x4yjn"]
 [ext_resource type="Texture2D" uid="uid://c5jxdv4t00rw5" path="res://assets/Sprite/background/explosion-th/sprite_3.png" id="4_aj1bm"]
 [ext_resource type="Texture2D" uid="uid://dibeh82cudaht" path="res://assets/Sprite/background/explosion-th/sprite_4.png" id="5_mg83a"]
@@ -39,6 +40,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_a83cw")
+scoreResource = ExtResource("2_jg06o")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
