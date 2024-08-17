@@ -21,7 +21,11 @@ public partial class Player : CharacterBody3D
     RayCast3D ray;
     AnimationPlayer animPlayer;
     float trauma;
-
+    //beer and cigarrete count
+    int beer = 0;
+    int cig = 0;
+    int maxBeer = 6;
+    int maxCig = 6;
     public override void _Ready()
     {
         camera = GetNode<Camera3D>("Camera3D");
@@ -54,6 +58,27 @@ public partial class Player : CharacterBody3D
                 break;
         }
     }
+    //public methods
+    public bool addCigarete()
+    {
+        if(cig < maxCig)
+        {
+            cig++;
+            GD.Print(cig);
+            return true;
+        }
+        return false;
+    }
+    public bool addBeer()
+    {
+        if(beer < maxBeer)
+        {
+            beer++;
+            GD.Print(beer);
+            return true;
+        }
+        return false;
+    }
     public void addTrauma(float value)
     {
         trauma += value;
@@ -75,10 +100,16 @@ public partial class Player : CharacterBody3D
     }
     private void scaleInput()
     {
-        if(Input.IsActionJustPressed("q"))
+        if(Input.IsActionJustPressed("q") && beer>0)
+        {
+            beer--;
             scale(0.5f);
-        else if(Input.IsActionJustPressed("e"))
+        }
+        else if(Input.IsActionJustPressed("e") && cig>0)
+        {
+            cig--;
             scale(-0.5f);
+        }
     }
     private void attackInput()
     {

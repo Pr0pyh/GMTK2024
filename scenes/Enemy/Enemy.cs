@@ -32,7 +32,7 @@ public partial class Enemy : CharacterBody3D
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
         raycast = GetNode<RayCast3D>("RayCast3D");
         particles.Emitting = false;
-        speed = 0.5f;
+        speed = 2.0f-Scale.Y;
         state = STATE.MOVING;
     }
     public override void _PhysicsProcess(double delta)
