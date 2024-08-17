@@ -94,6 +94,8 @@ public partial class Player : CharacterBody3D
     private void viewportUpdate()
     {
         viewportCamera.GlobalTransform = camera.GlobalTransform;
+        viewportCamera.HOffset = camera.HOffset;
+        viewportCamera.VOffset = camera.VOffset;
     }
     private void move(double delta)
     {

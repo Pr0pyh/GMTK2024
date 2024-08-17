@@ -13,11 +13,6 @@ use_collision = true
 flip_faces = true
 size = Vector3(10, 5, 10)
 
-[node name="Player" parent="." instance=ExtResource("1_yna32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-speed = 5.0
-mouseSens = 0.1
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qtwle")
 
@@ -35,3 +30,8 @@ health = 20
 [node name="Enemy2" parent="." instance=ExtResource("2_w61br")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2, 0.5, -2)
 health = 20
+
+[node name="Player" parent="." instance=ExtResource("1_yna32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+speed = 5.0
+mouseSens = 0.1
