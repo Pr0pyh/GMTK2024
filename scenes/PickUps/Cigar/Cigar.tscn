@@ -1,11 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtthi26k6yalq"]
+[gd_scene load_steps=8 format=3 uid="uid://dtthi26k6yalq"]
 
 [ext_resource type="Script" path="res://scenes/PickUps/Cigar/Cigar.cs" id="1_jnqys"]
+[ext_resource type="PackedScene" uid="uid://b0caayhxwla0q" path="res://assets/cigara/cigara.tscn" id="2_wxmok"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ej3lf"]
 size = Vector3(3, 2, 3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3u3ca"]
+
+[sub_resource type="Animation" id="Animation_pl2ga"]
+resource_name = "rolling"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cigara:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.785398), Vector3(0, 3.14159, 0.785398), Vector3(0, 6.28319, 0.785398)]
+}
+
+[sub_resource type="Animation" id="Animation_axfaf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cigara:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0.785398)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ix3yh"]
+_data = {
+"RESET": SubResource("Animation_axfaf"),
+"rolling": SubResource("Animation_pl2ga")
+}
 
 [node name="Cigar" type="Area3D"]
 script = ExtResource("1_jnqys")
@@ -14,11 +52,20 @@ script = ExtResource("1_jnqys")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_ej3lf")
 
+[node name="cigara" parent="." instance=ExtResource("2_wxmok")]
+transform = Transform3D(-0.282843, 0.282843, -3.49691e-08, 0.282843, 0.282843, 0, 2.47269e-08, -2.47269e-08, -0.4, 0, 0.78, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_3u3ca")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 light_color = Color(1, 0, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ix3yh")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
