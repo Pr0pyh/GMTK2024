@@ -41,13 +41,11 @@ public partial class Fists : Node3D
         {
             if(raycast.GetCollider() is Enemy enemy)
             {
-                GD.Print("colliding wall" + enemy);
                 enemy.damage(player, 10);
             }
             addImpact(raycast.GetCollisionPoint());
             player.addTrauma(0.2f);
             animPlayer2.Play("screen");
-            GD.Print("colliding");
             audioPlayer.Play();
         }
     }

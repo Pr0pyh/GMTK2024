@@ -57,7 +57,6 @@ public partial class Enemy : CharacterBody3D
     public void damage(Player player, int amount)
     {
         state = STATE.HURT;
-        GD.Print(Scale);
         if(player.Scale.Y < Scale.Y)
         {
             animPlayer.Stop();
@@ -116,7 +115,6 @@ public partial class Enemy : CharacterBody3D
         GetParent().AddChild(enemyDead);
         enemyDead.GlobalTransform = GlobalTransform;
         enemyDead.scale(Scale);
-        GD.Print(enemyDead.Scale);
         enemyDead.LinearVelocity = ((GlobalPosition - player.GlobalPosition).Normalized() + new Vector3(0.0f, 0.4f, 0.0f)) * 15.0f;
         QueueFree();
     }
@@ -129,7 +127,6 @@ public partial class Enemy : CharacterBody3D
         }
         if(body is Player player)
         {
-            GD.Print(state);
             if(!canAttack) return;
             state = STATE.ATTACKING;
             animPlayer2.Play("attack");

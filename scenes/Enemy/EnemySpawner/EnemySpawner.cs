@@ -18,8 +18,10 @@ public partial class EnemySpawner : Node3D
     [Export]
     int maxNumber;
     int number = 0;
+    Timer timer;
     public override void _Ready()
     {
+        timer = GetNode<Timer>("Timer");
         GD.Randomize();
     }
     public void spawn(Vector3 position)
@@ -40,5 +42,7 @@ public partial class EnemySpawner : Node3D
         position.X = (float)GD.RandRange(minX, maxX);
         position.Z = (float)GD.RandRange(minZ, maxZ);
         if(number < maxNumber) spawn(position);
+        if(timer.WaitTime > 2) timer.WaitTime -= 0.5;
+        GD.Print(timer.WaitTime);
     }
 }
