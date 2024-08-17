@@ -18,10 +18,13 @@ public partial class EnemySpawner : Node3D
     [Export]
     int maxNumber;
     int number = 0;
+    int score = 0;
     Timer timer;
+    World world;
     public override void _Ready()
     {
         timer = GetNode<Timer>("Timer");
+        world = GetParent<World>();
         GD.Randomize();
     }
     public void spawn(Vector3 position)
@@ -34,7 +37,11 @@ public partial class EnemySpawner : Node3D
     }
     public void decrease()
     {
-        if(number > 0) number--;
+        if(number > 0)
+        {
+            world.scorePoints(20);
+            number--;
+        }
     }
     public void _on_timer_timeout()
     {
