@@ -7,8 +7,10 @@ public partial class EndScene : Control
     public Resource scoreResource;
     int score;
     Label scoreBoard;
+    AnimationPlayer animPlayer;
     public override void _Ready()
     {
+        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         scoreBoard = GetNode<Label>("Label");
         if(scoreResource is Score resultScore)
         {
@@ -16,6 +18,7 @@ public partial class EndScene : Control
             score = resultScore.score;
         }
         scoreBoard.Text = "Score: " + score.ToString();
+        animPlayer.Play("end");
     }
     public void _on_button_pressed()
     {

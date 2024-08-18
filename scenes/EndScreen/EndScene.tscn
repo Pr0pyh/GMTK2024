@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjdlt5j0s8l3u"]
+[gd_scene load_steps=13 format=3 uid="uid://cjdlt5j0s8l3u"]
 
 [ext_resource type="Texture2D" uid="uid://2w02t0ae7ihs" path="res://assets/Sprite/background/explosion-th/sprite_0.png" id="1_02uc1"]
 [ext_resource type="Script" path="res://scenes/EndScreen/EndScene.cs" id="1_a83cw"]
@@ -32,6 +32,78 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_ll0jh"]
+resource_name = "end"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.713726, 0, 0.282353, 1), Color(0.333333, 0.0862745, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Button:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_xsc4n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.333333, 0.0862745, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dkuen"]
+_data = {
+"RESET": SubResource("Animation_xsc4n"),
+"end": SubResource("Animation_ll0jh")
+}
+
 [node name="EndScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -52,6 +124,7 @@ grow_vertical = 2
 color = Color(0.333333, 0.0862745, 1, 1)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(565, 192)
 rotation = -0.0626882
 scale = Vector2(11.1133, -8.59745)
@@ -60,6 +133,8 @@ animation = &"bob"
 autoplay = "bob"
 
 [node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
 offset_left = 395.0
 offset_top = 98.0
 offset_right = 466.0
@@ -71,11 +146,18 @@ text = "Score:
 "
 
 [node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
 offset_left = 457.0
 offset_top = 410.0
 offset_right = 667.0
 offset_bottom = 467.0
 theme = ExtResource("6_0jf1j")
 text = "MAIN MENU"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dkuen")
+}
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
