@@ -11,6 +11,10 @@ public partial class Fists : Node3D
     AudioStreamPlayer audioPlayer;
     [Export]
     PackedScene impactScene;
+    Node3D fist1;
+    Node3D fist2;
+    [Export]
+    Resource scoreResource;
     bool canAttack = true;
     int damage = 10;
     public override void _Ready()
@@ -19,6 +23,8 @@ public partial class Fists : Node3D
         animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         textureRect = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureRect>("TextureRect");
+        fist1 = GetNode<Node3D>("fist");
+        fist2 = GetNode<Node3D>("fist2");
         // player = (Player)GetParent().GetParent();
         textureRect.Visible = false;
     }
@@ -39,7 +45,15 @@ public partial class Fists : Node3D
         animPlayer.Stop();
         animPlayer.Play("attack_2");
     }
-
+    public void upgrade(int upgrade, int cost)
+    {
+        if(damage > 100) return;
+        damage += upgrade;
+        float scaleUpgrade = upgrade/100.0f;
+        fist1.Scale += new Vector3(scaleUpgrade, scaleUpgrade, scaleUpgrade);
+        fist2.Scale += new Vector3(scaleUpgrade, scaleUpgrade, scaleUpgrade);
+        if(scoreResource is Score score) score.score -= cost;
+    }
     public void attackRay()
     {
         canAttack = true;
@@ -49,6 +63,13 @@ public partial class Fists : Node3D
             if(raycast.GetCollider() is Enemy enemy)
             {
                 enemy.damage(player, damage);
+            }
+            else if(raycast.GetCollider() is UpgradeVendor upgradeVendor)
+            {
+                if(scoreResource is Score resourceScore)
+                {
+                    upgradeVendor.upgrade(this, resourceScore.score);
+                }
             }
             addImpact(raycast.GetCollisionPoint());
             player.addTrauma(0.2f);

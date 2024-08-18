@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://bo0rtd5oa1cg0"]
+
+[ext_resource type="Script" path="res://scenes/UpgradeVendor/UpgradeVendor.cs" id="1_5ah7f"]
+[ext_resource type="Texture2D" uid="uid://gs0h33bncmsu" path="res://assets/Sprite/upgrade/sprite_0.png" id="1_vcfgc"]
+[ext_resource type="Texture2D" uid="uid://dhddsufp5wvfq" path="res://assets/Sprite/upgrade/sprite_1.png" id="2_trff6"]
+[ext_resource type="Texture2D" uid="uid://dek2q26guhorj" path="res://assets/Sprite/upgrade/sprite_2.png" id="3_1mhr2"]
+[ext_resource type="Texture2D" uid="uid://d0ykr7jdmr1hy" path="res://assets/Sprite/upgrade/sprite_3.png" id="4_jp5wd"]
+[ext_resource type="Theme" uid="uid://cp1kq7i07405s" path="res://assets/Font/MinimalUI(1).tres" id="6_jxlmb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ragt7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_544f2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tp2n8"]
+size = Vector3(3.74713, 0.922852, 4.30365)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5tkw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vcfgc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_trff6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1mhr2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jp5wd")
+}],
+"loop": true,
+"name": &"upgradeanim",
+"speed": 5.0
+}]
+
+[node name="UpgradeVendor" type="StaticBody3D"]
+script = ExtResource("1_5ah7f")
+upgradeValue = 5
+cost = 20
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ragt7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_544f2")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0780334, 0.0385742, -0.139496)
+shape = SubResource("BoxShape3D_tp2n8")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.22711, 0)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_b5tkw")
+animation = &"upgradeanim"
+autoplay = "upgradeanim"
+frame_progress = 0.818505
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -19.0
+offset_right = 17.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.84, 1.64495)
+theme = ExtResource("6_jxlmb")
+text = "Cost to upgrade: "
+
+[connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
+[connection signal="body_exited" from="TriggerArea" to="." method="_on_trigger_area_body_exited"]

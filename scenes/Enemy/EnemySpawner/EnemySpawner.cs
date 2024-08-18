@@ -34,7 +34,6 @@ public partial class EnemySpawner : Node3D
         AddChild(enemy);
         if(speed < 15.0f) speed += 0.5f;
         enemy.speed += speed;
-        GD.Print(enemy.speed);
         enemy.Scale = new Vector3(enemyScale, enemyScale, enemyScale);
         enemy.GlobalPosition = new Vector3(position.X, enemyScale, position.Z);
         number++;
@@ -54,6 +53,5 @@ public partial class EnemySpawner : Node3D
         position.Z = (float)GD.RandRange(minZ, maxZ);
         if(number < maxNumber) spawn(position);
         if(timer.WaitTime > 2) timer.WaitTime -= 0.5;
-        GD.Print(timer.WaitTime);
     }
 }

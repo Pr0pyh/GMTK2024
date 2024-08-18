@@ -24,6 +24,7 @@ public partial class Enemy : CharacterBody3D
     Player player;
     Enemy flankEnemy;
     EnemySpawner spawner;
+    Area3D enemyDetect;
     bool canAttack = true;
     public override void _Ready()
     {
@@ -32,6 +33,7 @@ public partial class Enemy : CharacterBody3D
         animPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
         raycast = GetNode<RayCast3D>("RayCast3D");
+        enemyDetect = GetNode<Area3D>("EnemyDetect");
         spawner = GetParent<EnemySpawner>();
         particles.Emitting = false;
         speed += 2.0f-Scale.Y;
@@ -56,10 +58,12 @@ public partial class Enemy : CharacterBody3D
     }
     public void damage(Player player, int amount)
     {
+        health -= amount;
         state = STATE.HURT;
         if(player.Scale.Y < Scale.Y)
         {
             animPlayer.Stop();
+            animPlayer2.Stop();
             animPlayer.Play("hurt");
             return;
         }
@@ -70,9 +74,9 @@ public partial class Enemy : CharacterBody3D
         else
         {
             particles.Emitting = true;
-            health -= amount;
             // scale(-0.2f);
             animPlayer.Stop();
+            animPlayer2.Stop();
             animPlayer.Play("damage");
         }
     }
@@ -140,10 +144,12 @@ public partial class Enemy : CharacterBody3D
     public void _on_animation_player_animation_finished(String animName)
     {
         canAttack = true;
-        // if(animName == "damage") state = STATE.MOVING;
+        enemyDetect.Monitoring = true;
+        if(animName == "damage") state = STATE.MOVING;
     }
     public void _on_animation_player_2_animation_finished(String animName)
     {
+        enemyDetect.Monitoring = true;
         if(animName == "attack") state = STATE.MOVING;
     }
 }

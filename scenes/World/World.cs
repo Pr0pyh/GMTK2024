@@ -15,17 +15,24 @@ public partial class World : Node3D
         animPlayer = GetNode<CanvasLayer>("HighScore").GetNode<AnimationPlayer>("AnimationPlayer");
         label = GetNode<CanvasLayer>("HighScore").GetNode<Label>("Label");
     }
-    public void scorePoints(int amount)
+    public override void _PhysicsProcess(double delta)
     {
-        score += amount;
         if(scoreResource is Score resultScore)
         {
-            resultScore.score = score;
             if(resultScore.highscore < score)
                 resultScore.highscore = score;
+            label.Text = "Score: \n" + resultScore.score.ToString();
+        }
+    }
+    public void scorePoints(int amount)
+    {
+        if(scoreResource is Score resultScore)
+        {
+            resultScore.score += amount;
+            if(resultScore.highscore < score)
+                resultScore.highscore = resultScore.score;
             GD.Print(resultScore.score);
         }
         animPlayer.Play("highscore");
-        label.Text = "Score: \n" + score.ToString();
     }
 }
