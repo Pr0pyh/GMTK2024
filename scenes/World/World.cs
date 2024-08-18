@@ -21,7 +21,6 @@ public partial class World : Node3D
         label = GetNode<CanvasLayer>("HighScore").GetNode<Label>("Label");
         fpsLabel = GetNode<CanvasLayer>("HighScore").GetNode<Label>("Label2");
         timer = GetNode<Timer>("Timer");
-        Engine.MaxFps = 240;
     }
     public override void _PhysicsProcess(double delta)
     {

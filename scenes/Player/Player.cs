@@ -16,6 +16,8 @@ public partial class Player : CharacterBody3D
     public float mouseSens;
     [Export]
     public int health;
+    [Export]
+    public Resource optionsResource;
     STATE state;
     Camera3D camera;
     Camera3D viewportCamera;
@@ -37,6 +39,13 @@ public partial class Player : CharacterBody3D
     float mouseMove;
     public override void _Ready()
     {
+        if(optionsResource is OptionsResource options)
+        {
+            GD.Print(options.mouseSens);
+            GD.Print((int)options.targetFps);
+            mouseSens = (float)options.mouseSens;
+            Engine.MaxFps = (int)options.targetFps;
+        }
         camera = GetNode<Camera3D>("Camera3D");
         viewportCamera = camera.GetNode<SubViewportContainer>("SubViewportContainer").GetNode<SubViewport>("SubViewport").GetNode<Camera3D>("ViewportCamera");
         ray = camera.GetNode<RayCast3D>("RayCast3D");

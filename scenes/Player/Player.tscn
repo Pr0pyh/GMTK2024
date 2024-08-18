@@ -1,6 +1,7 @@
-[gd_scene load_steps=43 format=3 uid="uid://dbsucqyll2fn5"]
+[gd_scene load_steps=44 format=3 uid="uid://dbsucqyll2fn5"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_g25c0"]
+[ext_resource type="Resource" uid="uid://skt6vq4dfxve" path="res://resources/OptionsResource.tres" id="2_lsent"]
 [ext_resource type="PackedScene" uid="uid://bv8ue81ttw63g" path="res://scenes/Fists/Fists.tscn" id="2_wj8fp"]
 [ext_resource type="Texture2D" uid="uid://hh2w5hagk05c" path="res://assets/Sprite/crosshair.png" id="3_sdp60"]
 [ext_resource type="Texture2D" uid="uid://cg4magu0d53b7" path="res://assets/cigara/cigara_Cigaret-5.jpg" id="3_xlak6"]
@@ -573,6 +574,7 @@ animations = [{
 [node name="Player" type="CharacterBody3D"]
 axis_lock_linear_y = true
 script = ExtResource("1_g25c0")
+optionsResource = ExtResource("2_lsent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_06pf0")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://skt6vq4dfxve"]
+
+[ext_resource type="Script" path="res://resources/OptionsResource.cs" id="1_0jujr"]
+
+[resource]
+script = ExtResource("1_0jujr")
+mouseSens = 0.0
+targetFps = 0.0
