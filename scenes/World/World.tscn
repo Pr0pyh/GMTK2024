@@ -147,10 +147,10 @@ enemyScale = 1.5
 maxNumber = 3
 
 [node name="UpgradeVendor" parent="." instance=ExtResource("10_j21d3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3006, 0, -20.6567)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.67868, 0.0916593, -21.8101)
 
 [node name="Jukebox" parent="." instance=ExtResource("11_4m0b3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.0997)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -15.0997)
 
 [node name="HighScore" type="CanvasLayer" parent="."]
 

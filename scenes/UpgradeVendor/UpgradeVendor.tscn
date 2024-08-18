@@ -6,13 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://dek2q26guhorj" path="res://assets/Sprite/upgrade/sprite_2.png" id="3_1mhr2"]
 [ext_resource type="Texture2D" uid="uid://d0ykr7jdmr1hy" path="res://assets/Sprite/upgrade/sprite_3.png" id="4_jp5wd"]
 [ext_resource type="Theme" uid="uid://cp1kq7i07405s" path="res://assets/Font/MinimalUI(1).tres" id="6_jxlmb"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ragt7"]
+[ext_resource type="PackedScene" uid="uid://m55m53ry53ia" path="res://assets/upgrade/durexdispenser.tscn" id="7_ktgvh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_544f2"]
+size = Vector3(2.21484, 3.35339, 1.31891)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tp2n8"]
-size = Vector3(3.74713, 0.922852, 4.30365)
+size = Vector3(5.61136, 2.81885, 4.30365)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b5tkw"]
 animations = [{
@@ -39,20 +39,18 @@ script = ExtResource("1_5ah7f")
 upgradeValue = 5
 cost = 20
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_ragt7")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0703125, 0.220276, 0.0310974)
 shape = SubResource("BoxShape3D_544f2")
 
 [node name="TriggerArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0780334, 0.0385742, -0.139496)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.85408, 0.986572, -0.139496)
 shape = SubResource("BoxShape3D_tp2n8")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.22711, 0)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 3.25909, 0)
 billboard = 1
 sprite_frames = SubResource("SpriteFrames_b5tkw")
 animation = &"upgradeanim"
@@ -76,6 +74,9 @@ grow_vertical = 2
 scale = Vector2(1.84, 1.64495)
 theme = ExtResource("6_jxlmb")
 text = "Cost to upgrade: "
+
+[node name="durexdispenser" parent="." instance=ExtResource("7_ktgvh")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, 0)
 
 [connection signal="body_entered" from="TriggerArea" to="." method="_on_trigger_area_body_entered"]
 [connection signal="body_exited" from="TriggerArea" to="." method="_on_trigger_area_body_exited"]
