@@ -246,6 +246,7 @@ public partial class Player : CharacterBody3D
 
     public void _on_timer_timeout()
     {
+        attacker = null;
         state = STATE.MOVING;
     }
 }
