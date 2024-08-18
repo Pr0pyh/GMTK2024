@@ -12,6 +12,7 @@ public partial class Fists : Node3D
     [Export]
     PackedScene impactScene;
     bool canAttack = true;
+    int damage = 10;
     public override void _Ready()
     {
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -47,7 +48,7 @@ public partial class Fists : Node3D
         {
             if(raycast.GetCollider() is Enemy enemy)
             {
-                enemy.damage(player, 10);
+                enemy.damage(player, damage);
             }
             addImpact(raycast.GetCollisionPoint());
             player.addTrauma(0.2f);

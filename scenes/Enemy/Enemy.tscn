@@ -290,7 +290,7 @@ size = Vector3(3, 1.44385, 2)
 [node name="Enemy" type="CharacterBody3D"]
 axis_lock_linear_y = true
 script = ExtResource("1_sbrpi")
-health = 20
+health = 100
 enemyDeadScene = ExtResource("2_riy7f")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

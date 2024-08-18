@@ -117,9 +117,9 @@ public partial class Player : CharacterBody3D
     {
         if(mouseMove != null)
         {
-            if(mouseMove > 16)
+            if(mouseMove > 3)
                 fists.Position = fists.Position.Lerp(new Vector3(-0.24f, -0.784f, -0.925f), (float)(delta*5)); 
-            else if(mouseMove < -16)
+            else if(mouseMove < -3)
                 fists.Position = fists.Position.Lerp(new Vector3(0.24f, -0.784f, -0.925f), (float)(delta*5));
             else
                 fists.Position = fists.Position.Lerp(new Vector3(0.0f, -0.784f, -0.925f), (float)(delta*5));
@@ -138,14 +138,14 @@ public partial class Player : CharacterBody3D
     {
         if(Input.IsActionJustPressed("q") && beer>0)
         {
-            animPlayer.Play("beer");
+            animPlayer.Play("beer_consumed");
             beer--;
             beerCountLabel.Text = beer.ToString();
             scale(0.5f);
         }
         else if(Input.IsActionJustPressed("e") && cig>0)
         {
-            animPlayer.Play("cig");
+            animPlayer.Play("cig_consumed");
             cig--;
             cigCountLabel.Text = cig.ToString();
             scale(-0.5f);

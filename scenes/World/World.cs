@@ -21,6 +21,8 @@ public partial class World : Node3D
         if(scoreResource is Score resultScore)
         {
             resultScore.score = score;
+            if(resultScore.highscore < score)
+                resultScore.highscore = score;
             GD.Print(resultScore.score);
         }
         animPlayer.Play("highscore");

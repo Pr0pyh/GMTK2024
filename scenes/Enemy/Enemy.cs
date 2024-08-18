@@ -70,7 +70,7 @@ public partial class Enemy : CharacterBody3D
         else
         {
             particles.Emitting = true;
-            health -= 10;
+            health -= amount;
             // scale(-0.2f);
             animPlayer.Stop();
             animPlayer.Play("damage");
