@@ -776,3 +776,9 @@ rotation = -0.0381047
 scale = Vector2(1.13826, 1.14692)
 theme = ExtResource("14_f6iiq")
 text = "E"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

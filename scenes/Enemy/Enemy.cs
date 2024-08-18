@@ -86,7 +86,7 @@ public partial class Enemy : CharacterBody3D
         if(raycast.IsColliding())
         {
             if(raycast.GetCollider() is Player player)
-                player.damage(10);
+                player.damage(10, this);
         }
     }
     private void move()

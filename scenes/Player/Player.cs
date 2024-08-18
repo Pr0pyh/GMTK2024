@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 public partial class Player : CharacterBody3D
 {
     enum STATE
     {
-        MOVING
+        MOVING,
+        HIT
     };
 
     [Export]
@@ -23,6 +25,8 @@ public partial class Player : CharacterBody3D
     TextureProgressBar textureProgressBar;
     Label beerCountLabel;
     Label cigCountLabel;
+    Timer hitTimer;
+    Enemy attacker;
     float trauma;
     //beer and cigarrete count
     int beer = 0;
@@ -41,6 +45,7 @@ public partial class Player : CharacterBody3D
         textureProgressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureProgressBar>("TextureProgressBar");
         beerCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D").GetNode<Label>("Label");
         cigCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D3").GetNode<Label>("Label");
+        hitTimer = GetNode<Timer>("Timer");
         animPlayer.Play("start");
         beerCountLabel.Text = beer.ToString();
         cigCountLabel.Text = cig.ToString();
@@ -71,6 +76,15 @@ public partial class Player : CharacterBody3D
                 attackInput();
                 move(delta);
                 break;
+            case STATE.HIT:
+                sway(delta);
+                exitInput();
+                scaleInput();
+                updateBar();
+                viewportUpdate();
+                shakeState(delta);
+                hitMove();
+                break;
         }
     }
     //public methods
@@ -100,7 +114,7 @@ public partial class Player : CharacterBody3D
     {
         trauma += value;
     }
-    public void damage(int value)
+    public void damage(int value, Enemy enemy)
     {
         animPlayer.Play("screen");
         addTrauma(0.3f);
@@ -110,7 +124,12 @@ public partial class Player : CharacterBody3D
             GetTree().ChangeSceneToFile("res://scenes/EndScreen/EndScene.tscn");
         }
         else
+        {
+            attacker = enemy;
+            state = STATE.HIT;
             health -= value;
+            hitTimer.Start();
+        }
     }
     //input
     private void sway(double delta)
@@ -175,6 +194,13 @@ public partial class Player : CharacterBody3D
 
         return moveVector;
     }
+    private void hitMove()
+    {
+        Vector3 moveVector = new Vector3(0.0f, 0.0f, 0.0f);
+        if(attacker != null) moveVector = (GlobalPosition - attacker.GlobalPosition).Normalized();
+        Velocity = moveVector*speed;
+        MoveAndSlide();
+    }
     private void viewportUpdate()
     {
         viewportCamera.GlobalTransform = camera.GlobalTransform;
@@ -216,5 +242,10 @@ public partial class Player : CharacterBody3D
             shake();
             trauma = Mathf.Max((float)(trauma - 0.8*delta), 0.0f);
         }
+    }
+
+    public void _on_timer_timeout()
+    {
+        state = STATE.MOVING;
     }
 }
