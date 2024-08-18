@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cq0m4nthlox7s"]
+[gd_scene load_steps=23 format=3 uid="uid://cq0m4nthlox7s"]
 
 [ext_resource type="Script" path="res://scenes/World/World.cs" id="1_sm85t"]
 [ext_resource type="PackedScene" uid="uid://dbsucqyll2fn5" path="res://scenes/Player/Player.tscn" id="1_yna32"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bsvdq3ckxq201" path="res://assets/Sprite/background/explosion-th/sprite_1.png" id="9_f8nqq"]
 [ext_resource type="PackedScene" uid="uid://bo0rtd5oa1cg0" path="res://scenes/UpgradeVendor/UpgradeVendor.tscn" id="10_j21d3"]
 [ext_resource type="Texture2D" uid="uid://4tcfggcgkkqb" path="res://assets/Sprite/background/explosion-th/sprite_2.png" id="10_wlc8l"]
+[ext_resource type="PackedScene" uid="uid://d2m8e6kscm1o1" path="res://scenes/MusicPlayer/Jukebox/Jukebox.tscn" id="11_4m0b3"]
 [ext_resource type="Texture2D" uid="uid://c5jxdv4t00rw5" path="res://assets/Sprite/background/explosion-th/sprite_3.png" id="11_7chm7"]
 [ext_resource type="Texture2D" uid="uid://dibeh82cudaht" path="res://assets/Sprite/background/explosion-th/sprite_4.png" id="12_idjfb"]
 [ext_resource type="Theme" uid="uid://cp1kq7i07405s" path="res://assets/Font/MinimalUI(1).tres" id="13_2s0y5"]
@@ -148,6 +149,9 @@ maxNumber = 3
 [node name="UpgradeVendor" parent="." instance=ExtResource("10_j21d3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3006, 0, -20.6567)
 
+[node name="Jukebox" parent="." instance=ExtResource("11_4m0b3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.0997)
+
 [node name="HighScore" type="CanvasLayer" parent="."]
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="HighScore"]
@@ -172,3 +176,10 @@ text = "Score:"
 libraries = {
 "": SubResource("AnimationLibrary_pntl0")
 }
+
+[node name="Label2" type="Label" parent="HighScore"]
+offset_left = 9.0
+offset_top = 234.0
+offset_right = 49.0
+offset_bottom = 257.0
+text = "FPS: "

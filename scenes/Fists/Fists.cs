@@ -71,6 +71,10 @@ public partial class Fists : Node3D
                     upgradeVendor.upgrade(this, resourceScore.score);
                 }
             }
+            else if(raycast.GetCollider() is Jukebox jukebox)
+            {
+                jukebox.changeSong();
+            }
             addImpact(raycast.GetCollisionPoint());
             player.addTrauma(0.2f);
             animPlayer2.Play("screen");

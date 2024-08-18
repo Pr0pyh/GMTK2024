@@ -15,6 +15,10 @@ run/main_scene="res://scenes/World/World.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+MusicPlayer="*res://scenes/MusicPlayer/MusicPlayer.tscn"
+
 [display]
 
 window/stretch/mode="viewport"
@@ -75,3 +79,7 @@ attack2={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+shading/overrides/force_vertex_shading=true
+shading/overrides/force_lambert_over_burley=true
