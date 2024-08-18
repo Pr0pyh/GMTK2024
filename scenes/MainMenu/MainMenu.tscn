@@ -88,16 +88,6 @@ offset_bottom = 558.0
 theme = ExtResource("6_623gv")
 text = "EXIT"
 
-[node name="LineEdit" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 155.0
-offset_top = 405.0
-offset_right = 222.062
-offset_bottom = 436.0
-scale = Vector2(2.19637, 1.55571)
-theme = ExtResource("6_623gv")
-alignment = 1
-
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 8.0
@@ -107,16 +97,6 @@ offset_bottom = 431.0
 scale = Vector2(1.52, 3.02977)
 theme = ExtResource("6_623gv")
 text = "Target FPS:"
-
-[node name="LineEdit2" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 155.0
-offset_top = 470.0
-offset_right = 222.062
-offset_bottom = 501.0
-scale = Vector2(2.19637, 1.55571)
-theme = ExtResource("6_623gv")
-alignment = 1
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
@@ -128,5 +108,68 @@ scale = Vector2(1.52, 3.02977)
 theme = ExtResource("6_623gv")
 text = "Mouse sens:"
 
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 542.0
+offset_right = 102.0
+offset_bottom = 565.0
+scale = Vector2(1.52, 3.02977)
+theme = ExtResource("6_623gv")
+text = "Fullscreen:"
+
+[node name="CheckButton" type="CheckButton" parent="Label4"]
+layout_mode = 0
+offset_left = 154.605
+offset_top = -5.94104
+offset_right = 198.605
+offset_bottom = 18.059
+theme = ExtResource("6_623gv")
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 474.0
+offset_right = 323.0
+offset_bottom = 505.0
+scale = Vector2(2.2965, 1.31699)
+theme = ExtResource("6_623gv")
+text = "+"
+
+[node name="Button4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 474.0
+offset_right = 261.0
+offset_bottom = 505.0
+scale = Vector2(2.2965, 1.31699)
+theme = ExtResource("6_623gv")
+text = "-"
+
+[node name="Button5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 403.0
+offset_right = 323.0
+offset_bottom = 434.0
+scale = Vector2(2.2965, 1.31699)
+theme = ExtResource("6_623gv")
+text = "+"
+
+[node name="Button6" type="Button" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 403.0
+offset_right = 261.0
+offset_bottom = 434.0
+scale = Vector2(2.2965, 1.31699)
+theme = ExtResource("6_623gv")
+text = "-"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="toggled" from="Label4/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Button6" to="." method="_on_button_6_pressed"]

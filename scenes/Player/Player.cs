@@ -7,7 +7,8 @@ public partial class Player : CharacterBody3D
     enum STATE
     {
         MOVING,
-        HIT
+        HIT,
+        PAUSE
     };
 
     [Export]
@@ -27,6 +28,7 @@ public partial class Player : CharacterBody3D
     TextureProgressBar textureProgressBar;
     Label beerCountLabel;
     Label cigCountLabel;
+    Label exitLabel;
     Timer hitTimer;
     Enemy attacker;
     float trauma;
@@ -54,10 +56,12 @@ public partial class Player : CharacterBody3D
         textureProgressBar = GetNode<CanvasLayer>("CanvasLayer").GetNode<TextureProgressBar>("TextureProgressBar");
         beerCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D").GetNode<Label>("Label");
         cigCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D3").GetNode<Label>("Label");
+        exitLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<Label>("ExitLabel");
         hitTimer = GetNode<Timer>("Timer");
         animPlayer.Play("start");
         beerCountLabel.Text = beer.ToString();
         cigCountLabel.Text = cig.ToString();
+        exitLabel.Visible = false;
         fists.player = this;
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
@@ -94,6 +98,9 @@ public partial class Player : CharacterBody3D
                 shakeState(delta);
                 hitMove();
                 break;
+            case STATE.PAUSE:
+                pauseInput();
+                break;
         }
     }
     //public methods
@@ -104,6 +111,7 @@ public partial class Player : CharacterBody3D
             animPlayer.Play("cig");
             cig++;
             cigCountLabel.Text = cig.ToString();
+            if(cig == maxCig) cigCountLabel.Text = "MAX";
             return true;
         }
         return false;
@@ -115,6 +123,7 @@ public partial class Player : CharacterBody3D
             animPlayer.Play("beer");
             beer++;
             beerCountLabel.Text = beer.ToString();
+            if(beer == maxBeer) beerCountLabel.Text = "MAX";
             return true;
         }
         return false;
@@ -159,8 +168,21 @@ public partial class Player : CharacterBody3D
     }
     private void exitInput()
     {
-        if(Input.IsActionPressed("quit"))
+        if(Input.IsActionJustPressed("quit"))
+        {
+            state = STATE.PAUSE;
+            exitLabel.Visible = true;
+        }
+    }
+    private void pauseInput()
+    {
+        if(Input.IsActionJustPressed("quit"))
             GetTree().Quit();
+        else if(Input.IsActionJustPressed("attack"))
+        {
+            state = STATE.MOVING;
+            exitLabel.Visible = false;
+        }
     }
     private void scaleInput()
     {

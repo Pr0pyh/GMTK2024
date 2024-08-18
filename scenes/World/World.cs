@@ -45,7 +45,7 @@ public partial class World : Node3D
             GD.Print(resultScore.score);
         }
         timer.Start();
-        multiplier += 0.5f;
+        multiplier += 0.2f;
         animPlayer.Play("highscore");
     }
     public void _on_timer_timeout()
