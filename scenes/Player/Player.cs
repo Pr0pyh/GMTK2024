@@ -120,6 +120,9 @@ public partial class Player : CharacterBody3D
         {
             audioPlayer2.Stream = pickUpSound;
             audioPlayer2.Play();
+            animPlayer.Stop();
+            animPlayer.Play("reset");
+            animPlayer.Advance(0);
             animPlayer.Play("cig");
             cig++;
             cigCountLabel.Text = cig.ToString();
@@ -134,6 +137,9 @@ public partial class Player : CharacterBody3D
         {
             audioPlayer2.Stream = pickUpSound;
             audioPlayer2.Play();
+            animPlayer.Stop();
+            animPlayer.Play("reset");
+            animPlayer.Advance(0);
             animPlayer.Play("beer");
             beer++;
             beerCountLabel.Text = beer.ToString();
@@ -148,6 +154,9 @@ public partial class Player : CharacterBody3D
     }
     public void damage(int value, Enemy enemy)
     {
+        animPlayer.Stop();
+        animPlayer.Play("reset");
+        animPlayer.Advance(0);
         animPlayer.Play("screen");
         addTrauma(0.3f);
         if(health <= 0)
@@ -204,6 +213,9 @@ public partial class Player : CharacterBody3D
         {
             audioPlayer2.Stream = beerSound;
             audioPlayer2.Play();
+            animPlayer.Stop();
+            animPlayer.Play("reset");
+            animPlayer.Advance(0);
             animPlayer.Play("beer_consumed");
             beer--;
             beerCountLabel.Text = beer.ToString();
@@ -213,6 +225,9 @@ public partial class Player : CharacterBody3D
         {
             audioPlayer2.Stream = cigSound;
             audioPlayer2.Play();
+            animPlayer.Stop();
+            animPlayer.Play("reset");
+            animPlayer.Advance(0);
             animPlayer.Play("cig_consumed");
             cig--;
             cigCountLabel.Text = cig.ToString();
