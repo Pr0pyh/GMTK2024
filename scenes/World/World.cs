@@ -30,7 +30,7 @@ public partial class World : Node3D
             if(resultScore.highscore < score)
                 resultScore.highscore = score;
             if(multiplier > 1.0f)
-                label.Text = "Score: \n" + resultScore.score.ToString() + " X " + multiplier + "\n" + (int)timer.TimeLeft;
+                label.Text = "Score: \n" + resultScore.score.ToString() + " X " + multiplier.ToString("0.00") + "\n" + (int)timer.TimeLeft;
             else
                 label.Text = "Score: \n" + resultScore.score.ToString();
         }
