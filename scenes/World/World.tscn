@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://dbsucqyll2fn5" path="res://scenes/Player/Player.tscn" id="1_yna32"]
 [ext_resource type="Resource" uid="uid://t6qxyhgho885" path="res://resources/Score.tres" id="2_afmfy"]
 [ext_resource type="PackedScene" uid="uid://eu438nat5igx" path="res://scenes/Enemy/Enemy.tscn" id="2_w61br"]
-[ext_resource type="PackedScene" uid="uid://fedpcijx5fwv" path="res://assets/roomFixed/roomFixed.tscn" id="3_a2jyw"]
 [ext_resource type="PackedScene" uid="uid://cbogyy4scorb" path="res://scenes/PickUps/Beer/Beer.tscn" id="3_lybvo"]
 [ext_resource type="PackedScene" uid="uid://ddey0dlhjalxf" path="res://scenes/PickUps/PickUpSpawner/PickUpSpawner.tscn" id="3_so41x"]
+[ext_resource type="PackedScene" uid="uid://cd0kgnslmgul5" path="res://assets/sobica/kopija_sobice_za_svaku_slucaj.tscn" id="4_4sc7p"]
 [ext_resource type="PackedScene" uid="uid://dtthi26k6yalq" path="res://scenes/PickUps/Cigar/Cigar.tscn" id="4_es1ni"]
 [ext_resource type="PackedScene" uid="uid://cj74qqdvb2cpf" path="res://scenes/Enemy/EnemySpawner/EnemySpawner.tscn" id="4_j1qu6"]
 [ext_resource type="Texture2D" uid="uid://2w02t0ae7ihs" path="res://assets/Sprite/background/explosion-th/sprite_0.png" id="8_4g0rs"]
@@ -102,45 +102,45 @@ environment = SubResource("Environment_qtwle")
 transform = Transform3D(0.677077, 0.12941, 0.724445, -0.433013, 0.866025, 0.25, -0.595035, -0.482963, 0.642402, 26, 10, 8)
 
 [node name="Player" parent="." instance=ExtResource("1_yna32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2038, 1, -1.15674)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27122, 1, -2.39008)
 speed = 5.0
 mouseSens = 0.1
 health = 100
 
-[node name="room" parent="." instance=ExtResource("3_a2jyw")]
+[node name="kopija sobice za svaku slucaj2" parent="." instance=ExtResource("4_4sc7p")]
 
 [node name="PickUpSpawner" parent="." instance=ExtResource("3_so41x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.3876, 1.29514, -48.4092)
-minX = -40.0
-maxX = -5.0
-minZ = -45.0
+transform = Transform3D(0.676053, 0, 0.736853, 0, 1, 0, -0.736853, 0, 0.676053, -13.5645, -0.849434, -23.4803)
+minX = -30.0
+maxX = -13.0
+minZ = -23.0
 maxZ = -10.0
 pickupScene = ExtResource("3_lybvo")
 pickupScene2 = ExtResource("4_es1ni")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_j1qu6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3133, 0, 6.31787)
-minX = -40.0
-maxX = -4.0
-minZ = -45.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2247, 0, -9.72892)
+minX = -30.0
+maxX = -13.0
+minZ = -23.0
 maxZ = -10.0
 enemyScene = ExtResource("2_w61br")
 enemyScale = 0.5
 maxNumber = 3
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("4_j1qu6")]
-minX = -40.0
-maxX = -5.0
-minZ = -45.0
+minX = -30.0
+maxX = -13.0
+minZ = -23.0
 maxZ = -10.0
 enemyScene = ExtResource("2_w61br")
 enemyScale = 1.0
 maxNumber = 3
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("4_j1qu6")]
-minX = -40.0
-maxX = -5.0
-minZ = -45.0
+minX = -30.0
+maxX = -13.0
+minZ = -23.0
 maxZ = -10.0
 enemyScene = ExtResource("2_w61br")
 enemyScale = 1.5
