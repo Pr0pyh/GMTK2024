@@ -12,9 +12,12 @@ public partial class MainMenu : Control
     int targetFps;
     public override void _Ready()
     {
-        mouseSens = 0.0f;
+        mouseSens = 0.05f;
+        targetFps = 60;
         label = GetNode<Label>("Label3");
         label2 = GetNode<Label>("Label2");
+        label.Text = "Mouse sens:    " + mouseSens.ToString("0.00");
+        label2.Text = "Target FPS:    " + targetFps.ToString("0.00");
         // if(optionsResource is OptionsResource options)
         // {
         //     options.mouseSens = lineEdit1.Text.ToFloat();
