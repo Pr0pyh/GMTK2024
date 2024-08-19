@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpquv6etyf23c"]
+[gd_scene load_steps=5 format=3 uid="uid://cpquv6etyf23c"]
 
 [ext_resource type="Script" path="res://assets/Man/man.cs" id="1_xe1sb"]
 [ext_resource type="PackedScene" uid="uid://daaqf7pjwtuad" path="res://assets/Man/varijante/zizek.tscn" id="2_hwmpe"]
 [ext_resource type="PackedScene" uid="uid://bjw4pxhlvp7j5" path="res://assets/Man/varijante/man1.tscn" id="3_nh1wv"]
+[ext_resource type="PackedScene" uid="uid://c08qyyfpbgwej" path="res://assets/Man/varijante/antonije.tscn" id="4_h2501"]
 
 [node name="man" type="Node3D"]
 script = ExtResource("1_xe1sb")
-manVariants = Array[PackedScene]([ExtResource("2_hwmpe"), ExtResource("3_nh1wv")])
+manVariants = Array[PackedScene]([ExtResource("2_hwmpe"), ExtResource("3_nh1wv"), ExtResource("4_h2501")])

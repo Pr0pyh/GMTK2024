@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://eu438nat5igx"]
+[gd_scene load_steps=29 format=3 uid="uid://eu438nat5igx"]
 
 [ext_resource type="Script" path="res://scenes/Enemy/Enemy.cs" id="1_sbrpi"]
 [ext_resource type="PackedScene" uid="uid://b41fbt3yk70fg" path="res://scenes/Enemy/EnemyDead/EnemyDead.tscn" id="2_riy7f"]
@@ -584,6 +584,9 @@ size = Vector3(0.3, 0.3, 0.3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mleg6"]
 size = Vector3(3, 1.44385, 2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_p5pbi"]
+size = Vector3(4.36139, 1.44385, 1.60291)
+
 [node name="Enemy" type="CharacterBody3D"]
 axis_lock_linear_y = true
 script = ExtResource("1_sbrpi")
@@ -635,6 +638,13 @@ input_ray_pickable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0494843, 0.221924, 1.81815)
 shape = SubResource("BoxShape3D_mleg6")
 
+[node name="FlankDetect" type="Area3D" parent="."]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FlankDetect"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.197494, 0.221924, -0.149101)
+shape = SubResource("BoxShape3D_p5pbi")
+
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.591112, 0.510071)
 target_position = Vector3(0, 0, 1.5)
@@ -671,3 +681,5 @@ volume_db = -11.0
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_animation_player_2_animation_finished"]
 [connection signal="body_entered" from="EnemyDetect" to="." method="_on_enemy_detect_body_entered"]
 [connection signal="body_exited" from="EnemyDetect" to="." method="_on_enemy_detect_body_exited"]
+[connection signal="body_entered" from="FlankDetect" to="." method="_on_flank_detect_body_entered"]
+[connection signal="body_exited" from="FlankDetect" to="." method="_on_flank_detect_body_exited"]

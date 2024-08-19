@@ -10,7 +10,13 @@ public partial class Enemy : CharacterBody3D
         ATTACKING,
         HURT
     };
+    enum MOVING_STATE
+    {
+        MOVING,
+        FLANK,
+    };
     STATE state;
+    MOVING_STATE movingState;
     [Export]
     public int health;
     [Export]
@@ -56,15 +62,30 @@ public partial class Enemy : CharacterBody3D
         switch(state)
         {
             case STATE.MOVING:
-                move();
+                chooseMovingState();
+                move(speed);
                 break;
-            case STATE.FLANK:
-                moveFlank();
-                break;
+            // case STATE.FLANK:
+            //     moveFlank(speed);
+            //     break;
             case STATE.ATTACKING:
+                // move(0.0f);
                 break;
             case STATE.HURT:
+                // move(0.0f);
                 canAttack = false;
+                break;
+        }
+    }
+    public void chooseMovingState()
+    {
+        switch(movingState)
+        {
+            case MOVING_STATE.MOVING:
+                move(speed);
+                break;
+            case MOVING_STATE.FLANK:
+                moveFlank(speed);
                 break;
         }
     }
@@ -111,20 +132,23 @@ public partial class Enemy : CharacterBody3D
                 player.damage(10, this);
         }
     }
-    private void move()
+    private void move(float speedValue)
     {
+        animPlayer2.Play("reset");
         animPlayer2.Play("walk");
         LookAt(player.GlobalPosition, Vector3.Up, true);
         Rotation = new Vector3(0.0f, Rotation.Y, Rotation.Z);
         Vector3 moveVector = (player.GlobalPosition - GlobalPosition).Normalized();
-        Velocity = moveVector*speed;
+        Velocity = moveVector*speedValue;
         MoveAndSlide();
     }
-    private void moveFlank()
+    private void moveFlank(float speedValue)
     {
+        animPlayer2.Play("reset");
+        animPlayer2.Play("walk");
         Vector3 moveVector = (GlobalPosition - flankEnemy.GlobalPosition).Normalized();
         moveVector.Y = 0.0f;
-        Velocity = moveVector*speed;
+        Velocity = moveVector*speedValue;
         MoveAndSlide();
     }
     private void scale(float amount)
@@ -159,40 +183,57 @@ public partial class Enemy : CharacterBody3D
     }
     public void _on_enemy_detect_body_entered(Node3D body)
     {
-        if(body is Enemy enemy)
-        {
-            flankEnemy = enemy;
-            state = STATE.FLANK;
-        }
         if(body is Player player)
         {
             if(!canAttack) return;
             chooseAudioRandom();
             state = STATE.ATTACKING;
             // animPlayer2.Stop();
-            // animPlayer2.Play("reset");
+            animPlayer2.Play("reset");
             animPlayer2.Play("attack");
         }
     }
 
     public void _on_enemy_detect_body_exited(Node3D body)
     {
-        if(body is Enemy enemy) state = STATE.MOVING;
+        
+    }
+    public void _on_flank_detect_body_entered(Node3D body)
+    {
+        if(body is Enemy enemy && enemy != this)
+        {
+            flankEnemy = enemy;
+            // state = STATE.MOVING;
+            movingState = MOVING_STATE.FLANK;
+        }
+    }
+    public void _on_flank_detect_body_exited(Node3D body)
+    {
+        if(body is Enemy enemy) 
+        {
+            // state = STATE.MOVING;
+            movingState = MOVING_STATE.MOVING;
+        }
     }
     public void _on_animation_player_animation_finished(String animName)
     {
         canAttack = true;
         enemyDetect.Monitoring = false;
         enemyDetect.Monitoring = true;
-        if(animName == "damage" || animName == "hurt") state = STATE.MOVING;
+        if(animName == "damage" || animName == "hurt") 
+        {
+            state = STATE.MOVING;
+            // movingState = MOVING_STATE.MOVING;
+        }
     }
     public void _on_animation_player_2_animation_finished(String animName)
     {
         if(animName == "attack") 
         {
+            state = STATE.MOVING;
+            // movingState = MOVING_STATE.MOVING;
             enemyDetect.Monitoring = false;
             enemyDetect.Monitoring = true;
-            state = STATE.MOVING;
         }
     }
 }
