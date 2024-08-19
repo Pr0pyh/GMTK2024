@@ -82,11 +82,20 @@ text = "START"
 [node name="Button2" type="Button" parent="."]
 layout_mode = 0
 offset_left = 458.0
-offset_top = 501.0
+offset_top = 550.0
 offset_right = 668.0
-offset_bottom = 558.0
+offset_bottom = 607.0
 theme = ExtResource("6_623gv")
 text = "EXIT"
+
+[node name="Button7" type="Button" parent="."]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 481.0
+offset_right = 668.0
+offset_bottom = 538.0
+theme = ExtResource("6_623gv")
+text = "TUTORIAL"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
@@ -168,6 +177,7 @@ text = "-"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button7" to="." method="_on_button_7_pressed"]
 [connection signal="toggled" from="Label4/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]

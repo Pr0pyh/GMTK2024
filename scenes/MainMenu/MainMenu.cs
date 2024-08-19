@@ -55,6 +55,10 @@ public partial class MainMenu : Control
         if(targetFps >= 0) targetFps -= 30;
         label2.Text = "Target FPS:    " + targetFps.ToString("0.00");
     }
+    public void _on_button_7_pressed()
+    {
+        GetTree().ChangeSceneToFile("res://scenes/Tutorial/Tutorial.tscn");
+    }
     public void _on_check_button_toggled(bool toggled)
     {
         if(toggled)

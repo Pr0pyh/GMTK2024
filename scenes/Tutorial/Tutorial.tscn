@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://c52v54qjh6moi"]
+
+[ext_resource type="Script" path="res://scenes/Tutorial/Tutorial.cs" id="1_sa4u4"]
+[ext_resource type="Texture2D" uid="uid://xl1hn1rqspps" path="res://assets/Sprite/tutorial.png" id="1_tbqbn"]
+[ext_resource type="Theme" uid="uid://cp1kq7i07405s" path="res://assets/Font/MinimalUI(1).tres" id="2_7407b"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sa4u4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.333333, 0.0862745, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -458.0
+offset_top = -268.0
+offset_right = 664.0
+offset_bottom = 367.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.84)
+texture = ExtResource("1_tbqbn")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 574.0
+offset_right = 517.0
+offset_bottom = 605.0
+scale = Vector2(4.52, 2.08)
+theme = ExtResource("2_7407b")
+text = "Back"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
