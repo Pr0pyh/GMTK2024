@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv8ue81ttw63g"]
+[gd_scene load_steps=14 format=3 uid="uid://bv8ue81ttw63g"]
 
 [ext_resource type="Script" path="res://scenes/Fists/Fists.cs" id="1_aggd1"]
 [ext_resource type="PackedScene" uid="uid://hpdvds2xm58a" path="res://scenes/Fists/Impact/Impact.tscn" id="2_e7rc1"]
 [ext_resource type="PackedScene" uid="uid://0kqjameq1k6l" path="res://assets/Glove/fist.tscn" id="3_lh8jw"]
 [ext_resource type="Resource" uid="uid://t6qxyhgho885" path="res://resources/Score.tres" id="3_rby35"]
 [ext_resource type="AudioStream" uid="uid://bw8ucaj8l3h8g" path="res://assets/Sounds/vine-boom.mp3" id="3_sptqs"]
+[ext_resource type="AudioStream" uid="uid://qahhbekwgc7m" path="res://assets/Sounds/swoosh-sound-effect-for-fight-scenes-or-transitions-2-149890.mp3" id="5_hhl0d"]
 
 [sub_resource type="Animation" id="Animation_e5vr4"]
 length = 0.001
@@ -133,6 +134,8 @@ fill_to = Vector2(-0.625, 0.991)
 script = ExtResource("1_aggd1")
 impactScene = ExtResource("2_e7rc1")
 scoreResource = ExtResource("3_rby35")
+hitSound = ExtResource("3_sptqs")
+missSound = ExtResource("5_hhl0d")
 
 [node name="fist" parent="." instance=ExtResource("3_lh8jw")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.5, 0, -1)

@@ -17,6 +17,12 @@ public partial class Enemy : CharacterBody3D
     public PackedScene enemyDeadScene;
     [Export]
     public float speed;
+    [Export]
+    public AudioStream damageSound;
+    [Export]
+    public AudioStream[] attackSoundArray;
+    [Export]
+    public AudioStream[] yappinSoundArray;
     AnimationPlayer animPlayer;
     AnimationPlayer animPlayer2;
     GpuParticles3D particles;
@@ -25,6 +31,8 @@ public partial class Enemy : CharacterBody3D
     Enemy flankEnemy;
     EnemySpawner spawner;
     Area3D enemyDetect;
+    AudioStreamPlayer3D audioPlayer;
+    AudioStreamPlayer3D audioPlayer2;
     bool canAttack = true;
     public override void _Ready()
     {
@@ -34,10 +42,14 @@ public partial class Enemy : CharacterBody3D
         particles = GetNode<GpuParticles3D>("GPUParticles3D");
         raycast = GetNode<RayCast3D>("RayCast3D");
         enemyDetect = GetNode<Area3D>("EnemyDetect");
+        audioPlayer = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
+        audioPlayer2 = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D2");
         spawner = GetParent<EnemySpawner>();
         particles.Emitting = false;
         speed += 2.0f-Scale.Y;
         state = STATE.MOVING;
+        GD.Randomize();
+        chooseYappinRandom();
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -58,6 +70,8 @@ public partial class Enemy : CharacterBody3D
     }
     public void damage(Player player, int amount)
     {
+        audioPlayer.Stream = damageSound;
+        audioPlayer.Play();
         health -= amount;
         state = STATE.HURT;
         if(player.Scale.Y < Scale.Y)
@@ -122,6 +136,18 @@ public partial class Enemy : CharacterBody3D
         enemyDead.LinearVelocity = ((GlobalPosition - player.GlobalPosition).Normalized() + new Vector3(0.0f, 0.4f, 0.0f)) * 15.0f;
         QueueFree();
     }
+    private void chooseAudioRandom()
+    {
+        audioPlayer.Stream = attackSoundArray[GD.RandRange(0, attackSoundArray.Length-1)];
+        audioPlayer.Play();
+    }
+    private void chooseYappinRandom()
+    {
+        int number = GD.RandRange(0, yappinSoundArray.Length-1);
+        audioPlayer2.Stream = yappinSoundArray[number];
+        GD.Print(number);
+        audioPlayer2.Play();
+    }
     public void _on_enemy_detect_body_entered(Node3D body)
     {
         if(body is Enemy enemy)
@@ -132,6 +158,7 @@ public partial class Enemy : CharacterBody3D
         if(body is Player player)
         {
             if(!canAttack) return;
+            chooseAudioRandom();
             state = STATE.ATTACKING;
             animPlayer2.Play("attack");
         }

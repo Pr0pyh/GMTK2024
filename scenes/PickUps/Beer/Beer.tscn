@@ -8,6 +8,21 @@ size = Vector3(2.5564, 1.78662, 2.30397)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gtoq4"]
 
+[sub_resource type="Animation" id="Animation_k4is3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivcuga:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dio48"]
 resource_name = "rolling"
 loop_mode = 1
@@ -24,21 +39,6 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_k4is3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("pivcuga:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 3.14159, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c6y3l"]
 _data = {
 "RESET": SubResource("Animation_k4is3"),
@@ -53,7 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106812, 0.393311, 0.063957
 shape = SubResource("BoxShape3D_gtia0")
 
 [node name="pivcuga" parent="." instance=ExtResource("2_e4knb")]
-transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 0, 0.894705, 0)
+transform = Transform3D(-0.3, 0, 7.60555e-07, 0, 0.3, 0, -7.60555e-07, 0, -0.3, 0, 0.894705, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false

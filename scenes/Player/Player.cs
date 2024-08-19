@@ -19,6 +19,12 @@ public partial class Player : CharacterBody3D
     public int health;
     [Export]
     public Resource optionsResource;
+    [Export]
+    public AudioStream pickUpSound;
+    [Export]
+    public AudioStream beerSound;
+    [Export]
+    public AudioStream cigSound;
     STATE state;
     Camera3D camera;
     Camera3D viewportCamera;
@@ -31,6 +37,8 @@ public partial class Player : CharacterBody3D
     Label exitLabel;
     Timer hitTimer;
     Enemy attacker;
+    AudioStreamPlayer audioPlayer;
+    AudioStreamPlayer audioPlayer2;
     float trauma;
     //beer and cigarrete count
     int beer = 0;
@@ -58,6 +66,8 @@ public partial class Player : CharacterBody3D
         cigCountLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<AnimatedSprite2D>("AnimatedSprite2D3").GetNode<Label>("Label");
         exitLabel = GetNode<CanvasLayer>("CanvasLayer").GetNode<Label>("ExitLabel");
         hitTimer = GetNode<Timer>("Timer");
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        audioPlayer2 = GetNode<AudioStreamPlayer>("AudioStreamPlayer2");
         animPlayer.Play("start");
         beerCountLabel.Text = beer.ToString();
         cigCountLabel.Text = cig.ToString();
@@ -108,6 +118,8 @@ public partial class Player : CharacterBody3D
     {
         if(cig < maxCig)
         {
+            audioPlayer2.Stream = pickUpSound;
+            audioPlayer2.Play();
             animPlayer.Play("cig");
             cig++;
             cigCountLabel.Text = cig.ToString();
@@ -120,6 +132,8 @@ public partial class Player : CharacterBody3D
     {
         if(beer < maxBeer)
         {
+            audioPlayer2.Stream = pickUpSound;
+            audioPlayer2.Play();
             animPlayer.Play("beer");
             beer++;
             beerCountLabel.Text = beer.ToString();
@@ -188,6 +202,8 @@ public partial class Player : CharacterBody3D
     {
         if(Input.IsActionJustPressed("q") && beer>0)
         {
+            audioPlayer2.Stream = beerSound;
+            audioPlayer2.Play();
             animPlayer.Play("beer_consumed");
             beer--;
             beerCountLabel.Text = beer.ToString();
@@ -195,6 +211,8 @@ public partial class Player : CharacterBody3D
         }
         else if(Input.IsActionJustPressed("e") && cig>0)
         {
+            audioPlayer2.Stream = cigSound;
+            audioPlayer2.Play();
             animPlayer.Play("cig_consumed");
             cig--;
             cigCountLabel.Text = cig.ToString();
@@ -229,6 +247,7 @@ public partial class Player : CharacterBody3D
     {
         Vector3 moveVector = new Vector3(0.0f, 0.0f, 0.0f);
         if(attacker != null) moveVector = (GlobalPosition - attacker.GlobalPosition).Normalized();
+        attacker = null;
         Velocity = moveVector*speed;
         MoveAndSlide();
     }
@@ -241,6 +260,9 @@ public partial class Player : CharacterBody3D
     private void move(double delta)
     {
         Vector3 moveVector = moveInput();
+
+        if((moveVector == new Vector3(0.0f, 0.0f, 0.0f))) audioPlayer.Stop();
+        else if(!audioPlayer.Playing) audioPlayer.Play();
 
         Velocity = moveVector*speed;
         MoveAndSlide();

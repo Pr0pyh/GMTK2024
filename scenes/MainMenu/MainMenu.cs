@@ -37,23 +37,23 @@ public partial class MainMenu : Control
     public void _on_button_3_pressed()
     {
         if(mouseSens <= 2.9f) mouseSens += 0.05f;
-        label.Text = "Mouse sens:    " + mouseSens.ToString();
+        label.Text = "Mouse sens:    " + mouseSens.ToString("0.00");
     }
     public void _on_button_4_pressed()
     {
         if(mouseSens >= 0.1f) mouseSens -= 0.05f;
-        label.Text = "Mouse sens:    " + mouseSens.ToString();
+        label.Text = "Mouse sens:    " + mouseSens.ToString("0.00");
     }
 
     public void _on_button_5_pressed()
     {
         if(targetFps <= 360) targetFps += 30;
-        label2.Text = "Target FPS:    " + targetFps.ToString();
+        label2.Text = "Target FPS:    " + targetFps.ToString("0.00");
     }
     public void _on_button_6_pressed()
     {
         if(targetFps >= 0) targetFps -= 30;
-        label2.Text = "Target FPS:    " + targetFps.ToString();
+        label2.Text = "Target FPS:    " + targetFps.ToString("0.00");
     }
     public void _on_check_button_toggled(bool toggled)
     {

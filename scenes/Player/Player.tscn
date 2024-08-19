@@ -1,12 +1,15 @@
-[gd_scene load_steps=44 format=3 uid="uid://dbsucqyll2fn5"]
+[gd_scene load_steps=48 format=3 uid="uid://dbsucqyll2fn5"]
 
 [ext_resource type="Script" path="res://scenes/Player/Player.cs" id="1_g25c0"]
 [ext_resource type="Resource" uid="uid://skt6vq4dfxve" path="res://resources/OptionsResource.tres" id="2_lsent"]
 [ext_resource type="PackedScene" uid="uid://bv8ue81ttw63g" path="res://scenes/Fists/Fists.tscn" id="2_wj8fp"]
 [ext_resource type="Texture2D" uid="uid://hh2w5hagk05c" path="res://assets/Sprite/crosshair.png" id="3_sdp60"]
 [ext_resource type="Texture2D" uid="uid://cg4magu0d53b7" path="res://assets/cigara/cigara_Cigaret-5.jpg" id="3_xlak6"]
+[ext_resource type="AudioStream" uid="uid://dggajh1xyxdw4" path="res://assets/Sounds/beer-can-open-sound-230903.mp3" id="4_5tagv"]
+[ext_resource type="AudioStream" uid="uid://ck21ksojsapo" path="res://assets/Sounds/pickup_coin_free-97175.mp3" id="4_ecduk"]
 [ext_resource type="Texture2D" uid="uid://cnt3xybrdhkjt" path="res://assets/pivcuga/pivcuga_Zajecarsko-lager-CAN-new-pdf.jpg" id="4_fc0xp"]
 [ext_resource type="Texture2D" uid="uid://dhvvf0w4jjmls" path="res://assets/Sprite/healthbarUnder.png" id="4_ypfts"]
+[ext_resource type="AudioStream" uid="uid://cmwucbvuwk4s2" path="res://assets/Sounds/lighter-82231.mp3" id="5_1lj5p"]
 [ext_resource type="Texture2D" uid="uid://bpevaaoydppcl" path="res://assets/Sprite/healthbarProgress.png" id="5_pg2st"]
 [ext_resource type="Texture2D" uid="uid://2w02t0ae7ihs" path="res://assets/Sprite/background/explosion-th/sprite_0.png" id="6_3lodh"]
 [ext_resource type="Texture2D" uid="uid://du138lnfwrvqg" path="res://assets/Sprite/pivcugaanim/image/sprite_0.png" id="6_hqjm2"]
@@ -21,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://b3d0krxid21p2" path="res://assets/Sprite/cigarica/image/sprite_1.png" id="15_wwwip"]
 [ext_resource type="Texture2D" uid="uid://bv7ledfhfrp38" path="res://assets/Sprite/cigarica/image/sprite_2.png" id="16_4nvjw"]
 [ext_resource type="Texture2D" uid="uid://djji24vhvkgot" path="res://assets/Sprite/cigarica/image/sprite_3.png" id="17_xqce4"]
+[ext_resource type="AudioStream" uid="uid://ciwb5xkkmcudv" path="res://assets/Sounds/footsteps-running-wood-sneakers-consistently-close-79973.mp3" id="22_0ju3s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_06pf0"]
 
@@ -575,6 +579,9 @@ animations = [{
 axis_lock_linear_y = true
 script = ExtResource("1_g25c0")
 optionsResource = ExtResource("2_lsent")
+pickUpSound = ExtResource("4_ecduk")
+beerSound = ExtResource("4_5tagv")
+cigSound = ExtResource("5_1lj5p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_06pf0")
@@ -583,6 +590,14 @@ shape = SubResource("CapsuleShape3D_06pf0")
 libraries = {
 "": SubResource("AnimationLibrary_t3al7")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_0ju3s")
+volume_db = 8.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ecduk")
+volume_db = -5.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

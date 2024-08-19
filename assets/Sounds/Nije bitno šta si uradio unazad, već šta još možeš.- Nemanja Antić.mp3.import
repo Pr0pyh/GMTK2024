@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://2ij6lrrmnxcw"
+path="res://.godot/imported/Nije bitno šta si uradio unazad, već šta još možeš.- Nemanja Antić.mp3-c35063ce334871f8fa0280893f10a948.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/Nije bitno šta si uradio unazad, već šta još možeš.- Nemanja Antić.mp3"
+dest_files=["res://.godot/imported/Nije bitno šta si uradio unazad, već šta još možeš.- Nemanja Antić.mp3-c35063ce334871f8fa0280893f10a948.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

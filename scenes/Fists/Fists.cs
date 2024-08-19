@@ -15,6 +15,10 @@ public partial class Fists : Node3D
     Node3D fist2;
     [Export]
     Resource scoreResource;
+    [Export]
+    AudioStream hitSound;
+    [Export]
+    AudioStream missSound;
     bool canAttack = true;
     int damage = 10;
     public override void _Ready()
@@ -78,6 +82,12 @@ public partial class Fists : Node3D
             addImpact(raycast.GetCollisionPoint());
             player.addTrauma(0.2f);
             animPlayer2.Play("screen");
+            audioPlayer.Stream = hitSound;
+            audioPlayer.Play();
+        }
+        else
+        {
+            audioPlayer.Stream = missSound;
             audioPlayer.Play();
         }
     }

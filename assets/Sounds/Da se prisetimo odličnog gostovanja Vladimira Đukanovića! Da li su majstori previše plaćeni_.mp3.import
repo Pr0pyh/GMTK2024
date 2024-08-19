@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csloss7xyesji"
+path="res://.godot/imported/Da se prisetimo odličnog gostovanja Vladimira Đukanovića! Da li su majstori previše plaćeni_.mp3-d64eb174e8630dddec23a84fa7c8240a.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/Da se prisetimo odličnog gostovanja Vladimira Đukanovića! Da li su majstori previše plaćeni_.mp3"
+dest_files=["res://.godot/imported/Da se prisetimo odličnog gostovanja Vladimira Đukanovića! Da li su majstori previše plaćeni_.mp3-d64eb174e8630dddec23a84fa7c8240a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
