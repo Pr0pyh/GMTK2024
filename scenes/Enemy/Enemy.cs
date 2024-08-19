@@ -77,7 +77,11 @@ public partial class Enemy : CharacterBody3D
         if(player.Scale.Y < Scale.Y)
         {
             animPlayer.Stop();
+            animPlayer.Play("reset");
+            animPlayer.Advance(0);
             animPlayer2.Stop();
+            animPlayer2.Play("reset");
+            animPlayer2.Advance(0);
             animPlayer.Play("hurt");
             return;
         }
@@ -90,7 +94,11 @@ public partial class Enemy : CharacterBody3D
             particles.Emitting = true;
             // scale(-0.2f);
             animPlayer.Stop();
+            animPlayer.Play("reset");
+            animPlayer.Advance(0);
             animPlayer2.Stop();
+            animPlayer2.Play("reset");
+            animPlayer2.Advance(0);
             animPlayer.Play("damage");
         }
     }
@@ -105,6 +113,7 @@ public partial class Enemy : CharacterBody3D
     }
     private void move()
     {
+        animPlayer2.Play("walk");
         LookAt(player.GlobalPosition, Vector3.Up, true);
         Rotation = new Vector3(0.0f, Rotation.Y, Rotation.Z);
         Vector3 moveVector = (player.GlobalPosition - GlobalPosition).Normalized();
@@ -160,6 +169,8 @@ public partial class Enemy : CharacterBody3D
             if(!canAttack) return;
             chooseAudioRandom();
             state = STATE.ATTACKING;
+            // animPlayer2.Stop();
+            // animPlayer2.Play("reset");
             animPlayer2.Play("attack");
         }
     }
@@ -171,12 +182,17 @@ public partial class Enemy : CharacterBody3D
     public void _on_animation_player_animation_finished(String animName)
     {
         canAttack = true;
+        enemyDetect.Monitoring = false;
         enemyDetect.Monitoring = true;
-        if(animName == "damage") state = STATE.MOVING;
+        if(animName == "damage" || animName == "hurt") state = STATE.MOVING;
     }
     public void _on_animation_player_2_animation_finished(String animName)
     {
-        enemyDetect.Monitoring = true;
-        if(animName == "attack") state = STATE.MOVING;
+        if(animName == "attack") 
+        {
+            enemyDetect.Monitoring = false;
+            enemyDetect.Monitoring = true;
+            state = STATE.MOVING;
+        }
     }
 }
