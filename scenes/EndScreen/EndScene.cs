@@ -6,6 +6,7 @@ public partial class EndScene : Control
     [Export]
     public Resource scoreResource;
     int score;
+    int highscore;
     Label scoreBoard;
     AnimationPlayer animPlayer;
     public override void _Ready()
@@ -16,8 +17,9 @@ public partial class EndScene : Control
         {
             GD.Print(resultScore.score);
             score = resultScore.score;
+            highscore = resultScore.highscore;
         }
-        scoreBoard.Text = "Score: " + score.ToString();
+        scoreBoard.Text = "Score: " + score.ToString() + "\nHigh score: " + highscore.ToString();
         animPlayer.Play("end");
     }
     public void _on_button_pressed()

@@ -21,14 +21,18 @@ public partial class World : Node3D
         label = GetNode<CanvasLayer>("HighScore").GetNode<Label>("Label");
         fpsLabel = GetNode<CanvasLayer>("HighScore").GetNode<Label>("Label2");
         timer = GetNode<Timer>("Timer");
+        if(scoreResource is Score resultScore)
+        {
+            resultScore.score = score;
+        }
     }
     public override void _PhysicsProcess(double delta)
     {
         fpsLabel.Text = "FPS: " + Engine.GetFramesPerSecond();
         if(scoreResource is Score resultScore)
         {
-            if(resultScore.highscore < score)
-                resultScore.highscore = score;
+            if(resultScore.highscore < resultScore.score)
+                resultScore.highscore = resultScore.score;
             if(multiplier > 1.0f)
                 label.Text = "Score: \n" + resultScore.score.ToString() + " X " + multiplier.ToString("0.00") + "\n" + (int)timer.TimeLeft;
             else
@@ -40,7 +44,7 @@ public partial class World : Node3D
         if(scoreResource is Score resultScore)
         {
             resultScore.score += (int)((float)amount*multiplier);
-            if(resultScore.highscore < score)
+            if(resultScore.highscore < resultScore.score)
                 resultScore.highscore = resultScore.score;
             GD.Print(resultScore.score);
         }
