@@ -20,9 +20,11 @@
 
 [sub_resource type="Environment" id="Environment_qtwle"]
 background_mode = 1
-background_color = Color(0.301961, 0.227451, 0.054902, 1)
-background_energy_multiplier = 2.48
-ambient_light_color = Color(0.321569, 0.305882, 0.176471, 1)
+background_color = Color(0.423529, 0.372549, 0.184314, 1)
+background_energy_multiplier = 2.36
+ambient_light_source = 2
+ambient_light_color = Color(0.435294, 0.27451, 0.0509804, 1)
+ambient_light_energy = 2.26
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7m5h3"]
 animations = [{
@@ -150,7 +152,7 @@ maxNumber = 3
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.67868, 0.0916593, -21.8101)
 
 [node name="Jukebox" parent="." instance=ExtResource("11_4m0b3")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -15.0997)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -16.2831)
 
 [node name="HighScore" type="CanvasLayer" parent="."]
 

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv8enpy6722rx"]
+
+[ext_resource type="PackedScene" uid="uid://cov6ljynd5e8s" path="res://assets/Man/varijante/cikica1/cikica1.glb" id="1_36kf8"]
+
+[node name="cikica1" instance=ExtResource("1_36kf8")]

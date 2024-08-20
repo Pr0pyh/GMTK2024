@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ofqd5oagky7w"]
+[gd_scene load_steps=9 format=3 uid="uid://ofqd5oagky7w"]
 
 [ext_resource type="AudioStream" uid="uid://ftspydn8skmr" path="res://assets/Music/Imenjaka moga!.mp3" id="1_yc8at"]
 [ext_resource type="Script" path="res://scenes/MusicPlayer/MusicPlayer.cs" id="2_1fp4f"]
 [ext_resource type="AudioStream" uid="uid://rfbqgdfsn0pa" path="res://assets/Music/Dječaci - NARODNA (OFFICIAL VIDEO).mp3" id="3_p60ah"]
 [ext_resource type="AudioStream" uid="uid://bjwboefe7d8tw" path="res://assets/Music/Milan Topalovic Topalko - O svemu mi pricaj ti - (Audio 2009).mp3" id="4_igi74"]
+[ext_resource type="AudioStream" uid="uid://4u014kjf3rib" path="res://assets/Music/Djani - Balkanac - (Audio 2007).mp3" id="5_h2u7y"]
+[ext_resource type="AudioStream" uid="uid://d2vvncneg3xr1" path="res://assets/Music/LUNA - RED BULL (Hardstyle Remix).mp3" id="6_or465"]
+[ext_resource type="AudioStream" uid="uid://dsjlot6sw3fl3" path="res://assets/Music/Rokeri s Moravu - U našega Rajka (official video).mp3" id="7_7iqr2"]
+[ext_resource type="AudioStream" uid="uid://ec31e25nw62b" path="res://assets/Music/Zorica Markovic - Vozi Misko - (Audio 2004).mp3" id="8_gfd51"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_yc8at")
 volume_db = -5.622
 script = ExtResource("2_1fp4f")
-musicArray = Array[AudioStream]([ExtResource("3_p60ah"), ExtResource("4_igi74")])
+musicArray = Array[AudioStream]([ExtResource("3_p60ah"), ExtResource("4_igi74"), ExtResource("5_h2u7y"), ExtResource("6_or465"), ExtResource("7_7iqr2"), ExtResource("8_gfd51")])
